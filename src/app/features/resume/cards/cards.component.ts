@@ -13,4 +13,5 @@ export class CardsComponent {
   @Input() enterprise: any;
   @Input() city: any;
   @Input() description: any;
+  @Input() image: any;
 }
