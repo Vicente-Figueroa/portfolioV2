@@ -1,0 +1,26 @@
+/* Estilos para la tarjeta grande */
+.lg-screen {
+    display: block;
+    /* Mostrar la tarjeta grande por defecto */
+    /* Estilos para la tarjeta grande */
+}
+
+/* Estilos para la tarjeta pequeña */
+.sm-screen {
+    display: none;
+    /* Ocultar la tarjeta pequeña por defecto */
+    /* Estilos para la tarjeta pequeña */
+}
+
+/* Media query para pantalla pequeña */
+@media only screen and (max-width: 768px) {
+    .lg-screen {
+        display: none;
+        /* Ocultar la tarjeta grande en pantalla pequeña */
+    }
+
+    .sm-screen {
+        display: block;
+        /* Mostrar la tarjeta pequeña en pantalla pequeña */
+    }
+}
