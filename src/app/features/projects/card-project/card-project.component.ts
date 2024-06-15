@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-project',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './card-project.component.html',
   styleUrl: './card-project.component.css'
 })
@@ -11,5 +12,8 @@ export class CardProjectComponent {
   @Input() name: any;
   @Input() description: any;
   @Input() image: any;
-
+  showMore = false;
+  toggleDescription() {
+    this.showMore = !this.showMore;
+  }
 }

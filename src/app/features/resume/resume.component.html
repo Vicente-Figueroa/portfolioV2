@@ -11,40 +11,19 @@
                     <h2 class="text-primary fw-bolder mb-0">Experiencia</h2>
                 </div>
                 <!--Empresa 1-->
-                <app-cards image="defontana.png" date='2022-2024' job='Ingeniero de Datos' enterprise='Defontana'
-                    city='Santiago, Chile' description='Desarrollé e implementé pipelines de datos escalables para transportar
-                    información desde fuentes originales hasta un datalake, y diseñé dashboards personalizados
-                    para satisfacer las necesidades de los stakeholders.'></app-cards>
-                <!--Empresa 2-->
-                <app-cards image="cymasuite.png" date='2022' job='Ingeniero de Machine Learning' enterprise='Cymasuite'
-                    city='Santiago, Chile' description='Como ingeniero de aprendizaje automático, mi función fue analizar y extraer insights
-                     valiosos de grandes bases de datos, identificando patrones y tendencias
-                      que permitieron desarrollar modelos predictivos y de clasificación precisos.'></app-cards>
-                <!--Empresa 3-->
-                <app-cards image="rubits.jfif" date='2021' job='Ingeniero BackEnd' enterprise='Rubits Works'
-                    city='La Serena, Chile' description='Como desarrollador backEnd, diseñé y desarrollé una 
-                    API REST con Python, garantizando la integridad y seguridad de los datos.
-                    También lideré una migración entre bases de datos,
-                    asegurando la continuidad de los servicios y minimizando el tiempo de inactividad..'></app-cards>
+                <div *ngFor="let job of data.experience">
+                    <app-cards [image]="job.img" [date]="job.date" [job]="job.job" [enterprise]="job.enterprise"
+                        [city]="job.city" [description]="job.description"></app-cards>
+                </div>
             </section>
             <!-- Education Section-->
             <section>
                 <h2 class="text-secondary fw-bolder mb-4">Educación</h2>
                 <!--Educación 1-->
-                <app-cards image="uba.png" date='2024' job='Especialización en Deep Learning'
-                    enterprise='Centro de Graduados de la Universidad de Buenos Aires' city='Remoto' description='En este programa, profundicé en temas avanzados como
-                    redes neuronales convolucionales, redes recurrentes, aprendizaje 
-                    por refuerzo, visión por computadora y procesamiento de lenguaje natural,
-                    entre otros. Desarrollé proyectos prácticos y trabajé con datasets 
-                    complejos para resolver problemas de clasificación, regresión y clustering.'>
-                </app-cards>
-                <!--Educación 2-->
-                <app-cards image="ucn.png" date='2015-2021' job='Ingenieria en Información y control de Gestión'
-                    enterprise='Universidad Catolica del Norte' city='Coquimbo, Chile' description='La carrera de Ingeniería en Información y Control de Gestión
-                    se enfoca en la planificación, diseño, implementación y evaluación de 
-                    sistemas de información y procesos de negocio que permitan a las 
-                    organizaciones tomar decisiones informadas y mejorar su desempeño.'>
-                </app-cards>
+                <div *ngFor="let job of data.education">
+                    <app-cards [image]="job.img" [date]="job.date" [job]="job.job" [enterprise]="job.enterprise"
+                        [city]="job.city" [description]="job.description"></app-cards>
+                </div>
             </section>
             <!-- Divider-->
             <div class="pb-5"></div>

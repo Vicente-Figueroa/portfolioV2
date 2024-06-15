@@ -24,3 +24,39 @@
         /* Mostrar la tarjeta pequeña en pantalla pequeña */
     }
 }
+
+/* Oculta el contenido extra por defecto */
+.description-hidden {
+    display: none;
+    visibility: hidden;
+}
+
+/* Muestra el contenido cuando se hace clic en "Ver más" */
+.description-shown {
+    display: block;
+    visibility: visible;
+}
+
+/* Muestra el contenido en grande */
+.description-shown-large {
+    display: block;
+    visibility: visible;
+}
+
+/* Solo muestra el botón "Ver más" en dispositivos móviles */
+@media only screen and (max-width: 768px) {
+    .btn-ver-mas {
+        display: block;
+    }
+
+    .description-shown-large {
+        display: none;
+        visibility: visible;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .btn-ver-mas {
+        display: none;
+    }
+}

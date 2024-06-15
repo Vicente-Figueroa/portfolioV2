@@ -1,0 +1,35 @@
+[
+  {
+    "img": "dashboard.png",
+    "id": 1,
+    "date": "2022-2024",
+    "name": "Dashboard AWS",
+    "description": "Dashboard hecho con las tecnologias de AWS en donde el ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake en S3 y luego visualizado con QuickSight",
+    "tecnologies": [
+      "python",
+      "aws"
+    ]
+  },
+  {
+    "img": "rag.avif",
+    "id": 2,
+    "date": "2022-2024",
+    "name": "RAG Chatbot",
+    "description": "Un Rag es una innovadora aplicación que combina el modelos de lenguaje como ChatGPT con la capacidad de acceder a datos propietarios, superando las limitaciones de los modelos de lenguaje tradicionales.",
+    "tecnologies": [
+      "python",
+      "aws"
+    ]
+  },
+  {
+    "img": "pipelines.jpg",
+    "id": 3,
+    "date": "2022-2024",
+    "name": "Pipelines BigData",
+    "description": "Dashboard hecho con las tecnologias de AWS en donde el ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake en S3 y luego visualizado con QuickSight",
+    "tecnologies": [
+      "python",
+      "aws"
+    ]
+  }
+]

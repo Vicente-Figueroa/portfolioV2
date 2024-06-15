@@ -11,8 +11,22 @@
                     <div class="small text-muted">{{city}}</div>
                 </div>
             </div>
+            <!-- Botón "Ver más" -->
+            <button class="btn btn-dark btn-ver-mas mb-4" (click)="toggleDescription()">
+                {{showMore ? 'Ocultar' : 'Ver descripción'}}
+            </button>
             <div class="col-lg-8">
-                <div class="text-muted text-center">{{description}}</div>
+                <div class="text-muted text-center description-shown-large">
+                    <!-- Muestra una parte de la descripción -->
+                    <span>{{description}}</span>
+                </div>
+                <div class="text-muted text-center">
+                    <!-- Contenido oculto -->
+                    <span [ngClass]="{'description-hidden': !showMore, 'description-shown': showMore}">
+                        {{description}}
+                    </span>
+                </div>
+
             </div>
         </div>
     </div>

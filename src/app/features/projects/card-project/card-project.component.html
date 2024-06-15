@@ -19,8 +19,19 @@
                 <div class="bg-light p-4 rounded-4">
                     <img class="img-fluid" src={{image}} alt="..." />
                     <div class="text-primary fw-bolder">{{name}}</div>
-                    <p class="small text-muted">{{description}}</p>
                 </div>
+            </div> <!-- Botón "Ver más" -->
+            <button class="btn btn-dark" (click)="toggleDescription()">
+                {{showMore ? 'Ocultar' : 'Ver descripción'}}
+            </button>
+            <div class="col-lg-8">
+                <div class="text-muted text-center">
+                    <!-- Contenido oculto -->
+                    <span [ngClass]="{'description-hidden': !showMore, 'description-shown': showMore}">
+                        {{description}}
+                    </span>
+                </div>
+
             </div>
 
         </div>

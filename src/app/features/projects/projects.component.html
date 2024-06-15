@@ -5,20 +5,11 @@
         </div>
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-11 col-xl-9 col-xxl-8">
-                <!---->
-                <app-card-project image="dashboard.png" name="Dashboard AWS" description="Dashboard hecho con las tecnologias de AWS en donde el 
-                ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake
-                en S3 y luego visualizado con QuickSight"></app-card-project>
-                <!---->
-                <app-card-project image="rag.avif" name="RAG Chatbot" description="Un Rag 
-                (Retrieval Augmented Generation) es una innovadora aplicación que combina el 
-                poder de modelos de lenguaje como ChatGPT con la capacidad de acceder a datos 
-                propietarios, superando las limitaciones de los modelos de 
-                lenguaje tradicionales."></app-card-project>
-                <!---->
-                <app-card-project image="pipelines.jpg" name="Pipelines BigData" description="Un pipeline
-                de datos ofrece la posibilidad de analizar los datos producidos en un entorno seguro
-                de manera escalable gracias a los lenguajes que soportan BigData"></app-card-project>
+
+                <div *ngFor="let project of data">
+                    <app-card-project [image]="project.img" [name]="project.name"
+                        [description]="project.description"></app-card-project>
+                </div>
             </div>
         </div>
     </div>
@@ -28,7 +19,7 @@
     <div class="container px-5 my-5">
         <div class="text-center">
             <h2 class="display-4 fw-bolder mb-4">Construyamos algo juntos</h2>
-            <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="contact">Contact me</a>
+            <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="contact">Contactame</a>
         </div>
     </div>
 </section>
