@@ -1,0 +1,46 @@
+.chat-message {
+    margin-bottom: 20px;
+}
+
+.chat-message p {
+    font-size: 16px;
+    color: #333;
+}
+
+.chat-message:first-child {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  .spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: 0.25em solid #fff;
+    border-right-color: #337ab7;
+    border-radius: 50%;
+    -webkit-animation: spinner-border 1.5s linear infinite;
+    animation: spinner-border 1.5s linear infinite;
+  }
+  
+  @-webkit-keyframes spinner-border {
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes spinner-border {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
