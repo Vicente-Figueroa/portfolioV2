@@ -7,7 +7,7 @@
       "enterprise": "Defontana",
       "city": "Santiago, Chile",
       "description": "Desarrollé e implementé pipelines de datos escalables para transportar información desde fuentes originales hasta un datalake, y diseñé dashboards personalizados para satisfacer las necesidades de los stakeholders.",
-      "img": "defontana.png"
+      "img": "images/defontana.png"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "enterprise": "Cymasuite",
       "city": "Santiago, Chile",
       "description": "Como ingeniero de aprendizaje automático, mi función fue analizar y extraer insights valiosos de grandes bases de datos, identificando patrones y tendencias que permitieron desarrollar modelos predictivos y de clasificación precisos.",
-      "img": "cymasuite.png"
+      "img": "images/cymasuite.png"
     },
     {
       "id": 3,
@@ -25,7 +25,7 @@
       "enterprise": "Rubits Works",
       "city": "La Serena, Chile",
       "description": "Como desarrollador backEnd, diseñé y desarrollé una API REST con Python, garantizando la integridad y seguridad de los datos. También lideré una migración entre bases de datos, asegurando la continuidad de los servicios y minimizando el tiempo de inactividad.",
-      "img": "rubits.jfif"
+      "img": "images/rubits.jfif"
     }
   ],
   "education": [
@@ -36,7 +36,16 @@
       "enterprise": "Centro de Graduados de la Universidad de Buenos Aires",
       "city": "Remoto",
       "description": "En este programa, profundicé en temas avanzados como redes neuronales convolucionales, redes recurrentes, aprendizaje por refuerzo, visión por computadora y procesamiento de lenguaje natural, entre otros. Desarrollé proyectos prácticos y trabajé con datasets complejos para resolver problemas de clasificación, regresión y clustering.",
-      "img": "uba.png"
+      "img": "images/uba.png"
+    },
+    {
+      "id": 3,
+      "date": "2021-Actual",
+      "job": "Aprendizaje autonomo",
+      "enterprise": "",
+      "city": "Remoto",
+      "description": "Como compromiso con el desarrollo continuo, he explorado diversas plataformas como coursera, capacitateparaelempleo.com, udemy, youtube, entre otros. Gracias a eso he adquirido confianza y habilidades suficiente para llevar a cabo grandes proyectos",
+      "img": "images/ibm.png"
     },
     {
       "id": 2,
@@ -45,7 +54,7 @@
       "enterprise": "Universidad Catolica del Norte",
       "city": "Coquimbo, Chile",
       "description": "La carrera de Ingeniería en Información y Control de Gestión se enfoca en la planificación, diseño, implementación y evaluación de sistemas de información y procesos de negocio que permitan a las organizaciones tomar decisiones informadas y mejorar su desempeño.",
-      "img": "ucn.png"
+      "img": "images/ucn.png"
     }
   ]
 }

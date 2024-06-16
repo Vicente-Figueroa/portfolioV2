@@ -1,13 +1,15 @@
 [
   {
-    "img": "dashboard.png",
+    "img": "images/dashboard.png",
     "id": 1,
-    "date": "2022-2024",
+    "date": "2024",
     "name": "Dashboard AWS",
     "description": "Dashboard hecho con las tecnologias de AWS en donde el ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake en S3 y luego visualizado con QuickSight",
     "tecnologies": [
       "python",
-      "aws"
+      "AWS",
+      "SQL",
+      "Power BI"
     ]
   },
   {
@@ -17,8 +19,9 @@
     "name": "RAG Chatbot",
     "description": "Un Rag es una innovadora aplicación que combina el modelos de lenguaje como ChatGPT con la capacidad de acceder a datos propietarios, superando las limitaciones de los modelos de lenguaje tradicionales.",
     "tecnologies": [
-      "python",
-      "aws"
+      "Python",
+      "ChatGPT",
+      "ApiREST"
     ]
   },
   {
@@ -26,10 +29,11 @@
     "id": 3,
     "date": "2022-2024",
     "name": "Pipelines BigData",
-    "description": "Dashboard hecho con las tecnologias de AWS en donde el ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake en S3 y luego visualizado con QuickSight",
+    "description": "Los Pipelines son procesos internos encargados de transportar los datos desde distintas fuentes para procesarlos de manesa segura y escalable. A menudo se utilizan tecnologias de Big Data para hacer el proceso de manera eficiente.",
     "tecnologies": [
-      "python",
-      "aws"
+      "Python",
+      "Cloud",
+      "Spark"
     ]
   }
 ]
