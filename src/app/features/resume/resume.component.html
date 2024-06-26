@@ -1,116 +1,132 @@
+<app-projects></app-projects>
+
 <section class="py-5">
 
-<!-- Page Content-->
-<div class="container px-5">
-    <div class="text-center mb-5">
-        <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Resume</span></h1>
-    </div>
-    <div class="row gx-5 justify-content-center">
-        <div class="col-lg-11 col-xl-9 col-xxl-8">
-            <!-- Experience Section-->
-            <section>
-                <div class="d-flex align-items-center justify-content-left mb-4">
-                    <h2 class="text-primary fw-bolder mb-0">Experiencia</h2>
-                </div>
-                <!--Empresa 1-->
-                <div *ngFor="let job of data.experience">
-                    <app-cards [image]="job.img" [date]="job.date" [job]="job.job" [enterprise]="job.enterprise"
-                        [city]="job.city" [description]="job.description"></app-cards>
-                </div>
-            </section>
-            <!-- Education Section-->
-            <section>
-                <h2 class="text-secondary fw-bolder mb-4">Educación</h2>
-                <!--Educación 1-->
-                <div *ngFor="let job of data.education">
-                    <app-cards [image]="job.img" [date]="job.date" [job]="job.job" [enterprise]="job.enterprise"
-                        [city]="job.city" [description]="job.description"></app-cards>
-                </div>
-            </section>
-            <!-- Divider-->
-            <div class="pb-5"></div>
-            <!-- Skills Section-->
-            <section>
-                <!-- Skillset Card-->
-                <div class="card shadow border-0 rounded-4 mb-5">
-                    <div class="card-body p-5">
-                        <!-- Professional skills list-->
-                        <div class="mb-5">
-                            <div class="d-flex align-items-center mb-4">
-                                <div
-                                    class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                    <i class="bi bi-tools"></i>
+    <!-- Page Content-->
+    <div class="container px-5">
+        <div class="text-center mb-5  experience-tittle">
+            <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Experiencia</span></h1>
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8 experience-card">
+                <!-- Experience Section-->
+                <section>
+                    <!--Empresa 1-->
+                    <div *ngFor="let job of data.experience">
+                        <app-cards [image]="job.img" [date]="job.date" [job]="job.job" [enterprise]="job.enterprise"
+                            [city]="job.city" [description]="job.description"></app-cards>
+                    </div>
+                </section>
+                <!-- Education Section-->
+                <section class=" education-tittle">
+                    <h2 class="text-secondary fw-bolder mb-4">Educación</h2>
+                    <!--Educación 1-->
+                    <div *ngFor="let job of data.education">
+                        <app-cards [image]="job.img" [date]="job.date" [job]="job.job" [enterprise]="job.enterprise"
+                            [city]="job.city" [description]="job.description"></app-cards>
+                    </div>
+                </section>
+                <!-- Divider-->
+                <div class="pb-5"></div>
+                <!-- Skills Section-->
+                <section>
+                    <!-- Skillset Card-->
+                    <div class="card shadow border-0 rounded-4 mb-5 skills">
+                        <div class="card-body p-5">
+                            <!-- Professional skills list-->
+                            <div class="mb-5">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div
+                                        class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
+                                        <i class="bi bi-tools"></i>
+                                    </div>
+                                    <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Habilidades
+                                            profesionales</span></h3>
                                 </div>
-                                <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Habilidades
-                                        profesionales</span></h3>
-                            </div>
-                            <div class="row row-cols-1 row-cols-md-3 mb-4">
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Analisis de
-                                        datos</div>
-                                </div>
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Mineria de Datos
+                                <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Analisis de
+                                            datos</div>
+                                    </div>
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Mineria de
+                                            Datos
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Dashboards y
+                                            Reportes
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Dashboards y
-                                        Reportes
+                                <div class="row row-cols-1 row-cols-md-3">
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Inteligencia
+                                            Artificial
+                                        </div>
+                                    </div>
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Desarrollo
+                                            de
+                                            sistemas</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Desarrollo
+                                            de
+                                            Chatbots</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row-cols-1 row-cols-md-3">
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Inteligencia
-                                        Artificial
+                            <!-- Languages list-->
+                            <div class="mb-0">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div
+                                        class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
+                                        <i class="bi bi-code-slash"></i>
+                                    </div>
+                                    <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Languages</span>
+                                    </h3>
+                                </div>
+                                <div class="row row-cols-1 row-cols-md-3 mb-4">
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Python</div>
+                                    </div>
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JavaScript
+                                        </div>
+                                    </div>
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Angular
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Desarrollo de
-                                        sistemas</div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Desarrollo de
-                                        Chatbots</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Languages list-->
-                        <div class="mb-0">
-                            <div class="d-flex align-items-center mb-4">
-                                <div
-                                    class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                    <i class="bi bi-code-slash"></i>
-                                </div>
-                                <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Languages</span></h3>
-                            </div>
-                            <div class="row row-cols-1 row-cols-md-3 mb-4">
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Python</div>
-                                </div>
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JavaScript</div>
-                                </div>
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Angular</div>
-                                </div>
-                            </div>
-                            <div class="row row-cols-1 row-cols-md-3">
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">TensorFlow</div>
-                                </div>
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">AWS</div>
-                                </div>
-                                <div class="col mb-4 mb-md-0">
-                                    <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Spark</div>
+                                <div class="row row-cols-1 row-cols-md-3">
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">TensorFlow
+                                        </div>
+                                    </div>
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">AWS</div>
+                                    </div>
+                                    <div class="col mb-4 mb-md-0">
+                                        <div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Spark</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Call to action section-->
+<section class="py-5 bg-gradient-primary-to-secondary text-white">
+    <div class="container px-5 my-5">
+        <div class="text-center">
+            <h2 class="display-4 fw-bolder mb-4">Construyamos algo juntos</h2>
+            <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="contact">Contactame</a>
+        </div>
+    </div>
 </section>
