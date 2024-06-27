@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-contact',
@@ -23,7 +27,36 @@ export class ContactComponent {
   name!: string;
 
   constructor(private http: HttpClient) { }
-
+  ngOnInit() {
+    // Animation
+    const tl = gsap.timeline();
+    tl.fromTo('.tittle',
+      { opacity: 0, y: '-10%' }, // Estado inicial: transparente y ligeramente desplazado hacia arriba
+      {
+        opacity: 1, // Estado final: opacidad total
+        y: '0%', // Volver a la posición original en Y
+        duration: 3,
+        scrollTrigger: {
+          trigger: ".projects", // El trigger ahora es la propia sección ".projects"
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+    tl.fromTo('.form',
+      { opacity: 0, y: '-10%' }, // Estado inicial: transparente y ligeramente desplazado hacia arriba
+      {
+        opacity: 1, // Estado final: opacidad total
+        y: '0%', // Volver a la posición original en Y
+        duration: 3,
+        scrollTrigger: {
+          trigger: ".projects", // El trigger ahora es la propia sección ".projects"
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      },">-2"
+    );
+  }
   submitForm() {
     this.submitted = true;
 

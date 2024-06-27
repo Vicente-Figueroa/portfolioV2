@@ -1,6 +1,10 @@
 .chat-message {
     margin-bottom: 20px;
 }
+.tittle{
+  margin-bottom: -30px;
+  padding-bottom: -30px;
+}
 
 .chat-message p {
     font-size: 16px;
@@ -43,4 +47,13 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .form-control {
+    resize: vertical;
+  }
+
+  .form-control {
+    height: auto;
+    overflow-y: auto;
   }
