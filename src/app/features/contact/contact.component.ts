@@ -76,7 +76,7 @@ export class ContactComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    this.http.post('http://localhost:5000/items', contactData, { headers: headers })
+    this.http.post('https://apiv-pi.vercel.app/items', contactData, { headers: headers })
       .subscribe(response => {
         console.log(response);
         // Maneja la respuesta del servidor aquí
