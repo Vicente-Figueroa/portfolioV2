@@ -1,63 +1,109 @@
 <!-- Page content-->
 <section class="py-5">
-
-    <div class="container px-5">
-        <!-- Contact form-->
-        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
-            <div class="text-center mb-5 tittle">
-                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i
-                        class="bi bi-envelope"></i></div>
-                <h1 class="fw-bolder">Contáctame</h1>
-                <p class="lead fw-normal text-muted mb-0">Trabajemos juntos !</p>
-            </div>
-            <!-- Mensaje de éxito -->
-            <div *ngIf="showSuccessMessage" class="alert alert-success text-center" role="alert">
-                <p>Muchas gracias {{name}} ! </p>
-                <p>Mensaje enviado con éxito!</p>
-            </div>
-            <div class="row gx-5 justify-content-center form">
-                <div class="col-lg-8 col-xl-6">
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form id="contactForm" (ngSubmit)="submitForm()">
-                        <!-- Name input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Ingresa tu nombre ..."
-                                [(ngModel)]="contact.name" name="name" data-sb-validations="required" />
-                            <label for="name">Nombre</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                        </div>
-                        <!-- Asunto input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="issue" type="text" placeholder="Asunto ..."
-                                [(ngModel)]="contact.issue" name="issue" data-sb-validations="required" />
-                            <label for="issue">Asunto</label>
-                            <div class="invalid-feedback" data-sb-feedback="issue:required">required.</div>
-                        </div>
-                        <!-- Message input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="message" type="text" placeholder="Mensaje ..."
-                                [(ngModel)]="contact.message" name="message" data-sb-validations="required" />
-                            <label for="message">Mensaje</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
-                            </div>
-                        </div>
-                        <!-- Submit Button-->
-                        <div class="d-grid">
-                            <button class="btn btn-dark-2 btn-lg" type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div class="container px-5">
+    <!-- Contact form-->
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+      <div class="text-center mb-5 tittle">
+        <div
+          class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"
+        >
+          <i class="bi bi-envelope"></i>
         </div>
+        <h1 class="fw-bolder">Contáctame</h1>
+        <p class="lead fw-normal text-muted mb-0">Trabajemos juntos !</p>
+      </div>
+      <!-- Mensaje de éxito -->
+      <div
+        *ngIf="showSuccessMessage"
+        class="alert alert-success text-center"
+        role="alert"
+      >
+        <p>Muchas gracias {{ name }} !</p>
+        <p>Mensaje enviado con éxito!</p>
+      </div>
+      <div class="row gx-5 justify-content-center form">
+        <div class="col-lg-8 col-xl-6">
+          <!-- * * * * * * * * * * * * * * *-->
+          <!-- * * SB Forms Contact Form * *-->
+          <!-- * * * * * * * * * * * * * * *-->
+          <!-- This form is pre-integrated with SB Forms.-->
+          <!-- To make this form functional, sign up at-->
+          <!-- https://startbootstrap.com/solution/contact-forms-->
+          <!-- to get an API token!-->
+          <form id="contactForm" (ngSubmit)="submitForm()">
+            <!-- Name input-->
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="name"
+                type="text"
+                placeholder="Ingresa tu nombre ..."
+                [(ngModel)]="contact.name"
+                name="name"
+                data-sb-validations="required"
+              />
+              <label for="name">Nombre</label>
+              <div class="invalid-feedback" data-sb-feedback="name:required">
+                A name is required.
+              </div>
+            </div>
+            <!-- Correo / Whatsapp input-->
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="issue"
+                type="text"
+                placeholder="Correo o Whatsapp ..."
+                [(ngModel)]="contact.mail"
+                name="issue"
+                data-sb-validations="required"
+              />
+              <label for="mail">Correo o Whatsapp</label>
+              <div class="invalid-feedback" data-sb-feedback="issue:required">
+                required.
+              </div>
+            </div>
+            <!-- Asunto input-->
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="issue"
+                type="text"
+                placeholder="Asunto ..."
+                [(ngModel)]="contact.issue"
+                name="issue"
+                data-sb-validations="required"
+              />
+              <label for="issue">Asunto</label>
+              <div class="invalid-feedback" data-sb-feedback="issue:required">
+                required.
+              </div>
+            </div>
+            <!-- Message input-->
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="message"
+                type="text"
+                placeholder="Mensaje ..."
+                [(ngModel)]="contact.message"
+                name="message"
+                data-sb-validations="required"
+              />
+              <label for="message">Mensaje</label>
+              <div class="invalid-feedback" data-sb-feedback="message:required">
+                A message is required.
+              </div>
+            </div>
+            <!-- Submit Button-->
+            <div class="d-grid">
+              <button class="btn btn-dark-2 btn-lg" type="submit">
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <!-- Datos capturados -->
-    <div *ngIf="submitted">
-        <p>Nombre: {{ name }}</p>
-    </div>
+  </div>
 </section>
