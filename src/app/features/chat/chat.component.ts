@@ -83,7 +83,7 @@ export class ChatComponent implements OnInit {
           this.messageCount++; // Incrementamos el contador de mensajes
           console.log(this.messageCount);
 
-          if (this.messageCount >= 2) {
+          if (this.messageCount == 2) {
             this.showPopup = true; // Mostramos el popup después de 3 mensajes
           }
         });
