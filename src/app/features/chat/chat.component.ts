@@ -86,6 +86,10 @@ export class ChatComponent implements OnInit {
           if (this.messageCount == 2) {
             this.showPopup = true; // Mostramos el popup después de 3 mensajes
           }
+          else{
+            this.showPopup = false; // Mostramos el popup después de 3 mensajes
+
+          }
         });
     }
   }
