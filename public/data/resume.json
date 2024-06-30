@@ -6,7 +6,7 @@
       "job": "Ingeniero de Datos",
       "enterprise": "Defontana",
       "city": "Santiago, Chile",
-      "description": "Desarrollé e implementé pipelines de datos escalables para transportar información desde fuentes originales hasta un datalake, y diseñé dashboards personalizados para satisfacer las necesidades de los stakeholders.",
+      "description": "Como ingeniero de datos, transformé la gestión de datos en la empresa, implementando soluciones escalables y robustas. Desarrollé pipelines que aseguran la integridad de los datos desde su origen hasta su consolidación en datalakes eficientes. Mis reportes y visualizaciones avanzadas proporcionaron insights clave, permitiendo una comprensión profunda del negocio que impulsó la toma de decisiones estratégicas y la competitividad.",
       "img": "images/defontana.png"
     },
     {
@@ -15,7 +15,7 @@
       "job": "Ingeniero de Machine Learning",
       "enterprise": "Cymasuite",
       "city": "Santiago, Chile",
-      "description": "Como ingeniero de aprendizaje automático, mi función fue analizar y extraer insights valiosos de grandes bases de datos, identificando patrones y tendencias que permitieron desarrollar modelos predictivos y de clasificación precisos.",
+      "description": "Como ingeniero de aprendizaje automático, mi función fue analizar y extraer insights valiosos de grandes bases de datos, identificando patrones y tendencias que permitieron desarrollar modelos predictivos y de clasificación precisos. Destaco la creación de dos sistemas innovadores: uno para clasificar cuentas contables de manera automática y otro para detectar transacciones con factura potencialmente fraudulentas, ambos utilizando técnicas avanzadas de machine learning.",
       "img": "images/cymasuite.png"
     },
     {
@@ -24,7 +24,7 @@
       "job": "Ingeniero BackEnd",
       "enterprise": "Rubits Works",
       "city": "La Serena, Chile",
-      "description": "Como desarrollador backEnd, diseñé y desarrollé una API REST con Python, garantizando la integridad y seguridad de los datos. También lideré una migración entre bases de datos, asegurando la continuidad de los servicios y minimizando el tiempo de inactividad.",
+      "description": "Como desarrollador backend, diseñé y desarrollé una API REST robusta y escalable utilizando Python, garantizando la integridad y seguridad de los datos a través de prácticas de codificación segura y la implementación de medidas de autenticación y autorización. Además, lideré con éxito una migración crítica entre bases de datos, planificando y ejecutando cuidadosamente el proceso para asegurar una transición fluida y minimizar el tiempo de inactividad. ",
       "img": "images/rubits.jfif"
     }
   ],
