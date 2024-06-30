@@ -1,6 +1,7 @@
 .chat-message {
   margin-bottom: 20px;
 }
+
 .tittle {
   margin-bottom: -30px;
   padding-bottom: -30px;
@@ -80,10 +81,12 @@
   text-align: center;
 }
 
-.email{
+.email {
   margin-top: 10px;
 }
 
-.container{
-  max-width: 35vw;
+@media (min-width: 1024px) {
+  .container {
+    max-width: 35vw;
+  }
 }
