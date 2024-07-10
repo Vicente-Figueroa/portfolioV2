@@ -5,8 +5,12 @@
             <div class="p-5">
                 <h2 class="fw-bolder">{{name}}</h2>
                 <p>{{description}}</p>
+                <div *ngIf="link">
+                    <a [href]="link" target="_blank">Ejemplo</a>
+                </div>
                 <h2 class="small fw-bolder">Tecnologias</h2>
                 <p>[{{tecnologies }}]</p>
+
             </div>
             <img class="img-fluid" src={{image}} alt="..." />
         </div>
@@ -21,6 +25,9 @@
                 <div class="bg-light p-4 rounded-4">
                     <img class="img-fluid" src={{image}} alt="..." />
                     <div class="text-primary fw-bolder">{{name}}</div>
+                    <div *ngIf="link">
+                        <a [href]="link" target="_blank">Ejemplo</a>
+                    </div>
                     <h2 class="small fw-bolder">Tecnologias</h2>
                     <p class="small">[ {{tecnologies }} ]</p>
                     <button class="btn btn-dark" (click)="toggleDescription()">

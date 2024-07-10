@@ -1,19 +1,6 @@
 [
   {
     "img": "images/dashboard.png",
-    "id": 5,
-    "date": "jun-2024",
-    "name": "Serenina Estudio",
-    "description": "Dashboard hecho con las tecnologias de AWS en donde el ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake en S3 y luego visualizado con QuickSight",
-    "tecnologies": [
-      "python",
-      "AWS",
-      "SQL",
-      "Power BI"
-    ]
-  },
-  {
-    "img": "images/dashboard.png",
     "id": 1,
     "date": "2024",
     "name": "Dashboard AWS",
@@ -30,12 +17,13 @@
     "id": 2,
     "date": "2022-2024",
     "name": "RAG Chatbot",
-    "description": "Un Rag es una innovadora aplicación que combina el modelos de lenguaje como ChatGPT con la capacidad de acceder a datos propietarios, superando las limitaciones de los modelos de lenguaje tradicionales.",
+    "description": "Un Rag es una innovadora aplicación que combina el modelos de lenguaje como ChatGPT con la capacidad de acceder a datos propietarios, superando las limitaciones de los modelos de lenguaje tradicionales. ",
     "tecnologies": [
       "Python",
       "ChatGPT",
       "ApiREST"
-    ]
+    ],
+    "link": "https://chat-utem.vercel.app/chat"
   },
   {
     "img": "images/pipelines.jpg",

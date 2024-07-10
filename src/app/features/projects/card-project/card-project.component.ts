@@ -13,6 +13,7 @@ export class CardProjectComponent {
   @Input() description: any;
   @Input() image: any;
   @Input() tecnologies: any;
+  @Input() link: any;
   showMore = false;
   toggleDescription() {
     this.showMore = !this.showMore;

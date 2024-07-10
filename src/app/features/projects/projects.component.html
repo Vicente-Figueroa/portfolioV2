@@ -1,16 +1,11 @@
 <section class="py-5 projects">
-    <div class="container px-5 mb-5">
-        <div class="text-center mb-5">
-            <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline tittle">Proyectos</span></h1>
-        </div>
-        <div class="row gx-5 justify-content-center">
-            <div class="col-lg-11 col-xl-9 col-xxl-8 project">
+    <h2 class="text-secondary fw-bolder mb-4">Proyectos</h2>
+    <div *ngFor="let project of data">
+        <app-card-project [image]="project.img" [name]="project.name" [description]="project.description"
+            [tecnologies]="project.tecnologies" [link]="project.link">
 
-                <div *ngFor="let project of data">
-                    <app-card-project [image]="project.img" [name]="project.name" [description]="project.description"
-                        [tecnologies]="project.tecnologies"></app-card-project>
-                </div>
-            </div>
-        </div>
+        </app-card-project>
+
+
     </div>
 </section>
