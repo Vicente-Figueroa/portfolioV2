@@ -8,6 +8,7 @@
     "tecnologies": [
       "Python",
       "ChatGPT",
+      "Gemini",
       "ApiREST"
     ],
     "link": "https://chat-utem.vercel.app/"
@@ -17,7 +18,7 @@
     "id": 1,
     "date": "2024",
     "name": "Análisis Predictivo y Aprendizaje Automático",
-    "description": "Con el uso d el aprendizaje automático para realizar predicciones y clasificaciones precisas, identificando patrones temporales y más. Transformo datos complejos en información valiosa para optimizar decisiones empresariales.",
+    "description": "Con el uso del aprendizaje automático para realizar predicciones y clasificaciones precisas podre indentificar patrones temporales y más. Transformo datos complejos en información valiosa para optimizar decisiones empresariales.",
     "tecnologies": [
       "Python",
       "Machine Learning",
