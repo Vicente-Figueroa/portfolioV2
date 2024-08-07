@@ -7,6 +7,7 @@ import { ChatComponent } from './features/chat/chat.component';
 
 export const routes: Routes = [
   { path: 'resume', component: ResumeComponent },
+  { path: 'projects', component: ProjectsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'chat', component: ChatComponent },
   { path: '**', component: HomeComponent },

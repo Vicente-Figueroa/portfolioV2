@@ -1,10 +1,35 @@
 [
   {
+    "img": "images/rag.jpg",
+    "id": 2,
+    "date": "2022-2024",
+    "name": "Asistente virtual Personalizado",
+    "description": "Un Asistente virtual Personalizado redefine los chatbots con los últimos avances en inteligencia artificial. Aprovechando los potentes modelos actuales, permite integrar cualquier tipo de información para actuar de manera eficiente y precisa para ti.",
+    "tecnologies": [
+      "Python",
+      "ChatGPT",
+      "ApiREST"
+    ],
+    "link": "https://chat-utem.vercel.app/"
+  },
+  {
+    "img": "images/forecasting_wallpaper_data_science.png",
+    "id": 1,
+    "date": "2024",
+    "name": "Análisis Predictivo y Aprendizaje Automático",
+    "description": "Con el uso d el aprendizaje automático para realizar predicciones y clasificaciones precisas, identificando patrones temporales y más. Transformo datos complejos en información valiosa para optimizar decisiones empresariales.",
+    "tecnologies": [
+      "Python",
+      "Machine Learning",
+      "Data Mining"
+    ]
+  },
+  {
     "img": "images/dashboard.png",
     "id": 1,
     "date": "2024",
-    "name": "Dashboard AWS",
-    "description": "Dashboard hecho con las tecnologias de AWS en donde el ETL paso por varios procesos como DMS y Glue, almacenado en un Datalake en S3 y luego visualizado con QuickSight",
+    "name": "Visualización de Datos Automatizada",
+    "description": "Automatizo la visualización de datos y la generación de informes. Gracias a las tecnologias actuales, se puede transformar los datos complejos en reportes claros y accesibles lo que optimiza la toma de decisiones empresariales de manera eficiente.",
     "tecnologies": [
       "python",
       "AWS",
@@ -13,24 +38,11 @@
     ]
   },
   {
-    "img": "images/rag.avif",
-    "id": 2,
-    "date": "2022-2024",
-    "name": "RAG Chatbot",
-    "description": "Un Rag es una innovadora aplicación que combina el modelos de lenguaje como ChatGPT con la capacidad de acceder a datos propietarios, superando las limitaciones de los modelos de lenguaje tradicionales. ",
-    "tecnologies": [
-      "Python",
-      "ChatGPT",
-      "ApiREST"
-    ],
-    "link": "https://chat-utem.vercel.app/chat"
-  },
-  {
-    "img": "images/pipelines.jpg",
+    "img": "images/bigdata.png",
     "id": 3,
     "date": "2022-2024",
-    "name": "Pipelines BigData",
-    "description": "Los Pipelines son procesos internos encargados de transportar los datos desde distintas fuentes para procesarlos de manesa segura y escalable. A menudo se utilizan tecnologias de Big Data para hacer el proceso de manera eficiente.",
+    "name": "Procesamiento de BigData",
+    "description": "Gestiono la big data para transformar y transportar datos desde sus fuentes originales hasta su destino final, asegurando un procesamiento eficiente y una visualización clara. Utilizando tecnologías avanzadas para manejar grandes volúmenes de información de manera segura y escalable",
     "tecnologies": [
       "Python",
       "Cloud",
