@@ -1,0 +1,9 @@
+<div class="chat-container">
+    <button class="chat-button" (click)="toggleChat()">
+      💬
+    </button>
+  
+    <div *ngIf="chatVisible" class="chat-popup">
+      <app-chat (closeChatEvent)="closeChat()"></app-chat>
+    </div>
+  </div>

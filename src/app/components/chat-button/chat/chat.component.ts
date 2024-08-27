@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
 import {
   HttpClient,
   HttpClientModule,
@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit {
   loading = true;
   messageCount = 0; // Agregamos una variable para contar los mensajes enviados
   showPopup = false; // Variable para controlar la visibilidad del popup
+  @Output() closeChatEvent = new EventEmitter<void>();
 
   constructor(private http: HttpClient) {}
 
@@ -116,5 +117,8 @@ export class ChatComponent implements OnInit {
           }
         );
     }
+  }
+  closeChat() {
+    this.closeChatEvent.emit(); // Emitimos el evento para cerrar el chat
   }
 }

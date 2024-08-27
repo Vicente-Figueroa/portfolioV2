@@ -1,0 +1,55 @@
+<div class="chat-popup-header">
+  <h2>Bot de Preguntas</h2>
+  <button class="close-button" (click)="closeChat()">✖</button>
+</div>
+
+<div class="chat-popup-body">
+  <div *ngFor="let message of conversation" class="chat-message">
+    <p>{{ message }}</p>
+  </div>
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+</div>
+
+<div class="chat-popup-footer">
+  <input
+    class="form-control"
+    type="text"
+    [(ngModel)]="question"
+    placeholder="Ingresa tu pregunta"
+    (keyup.enter)="askQuestion()"
+  />
+  <button
+    class="btn btn-dark-2 btn-lg"
+    type="submit"
+    [disabled]="loading || !question"
+    (click)="askQuestion()"
+  >
+    Enviar
+  </button>
+</div>
+
+<!-- Popup -->
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <p>
+      Si quieres seguir chateando, envíame un correo para que hablemos.
+    </p>
+    <input
+      class="form-control"
+      type="text"
+      [(ngModel)]="email"
+      placeholder="Ingresa tu correo"
+    />
+    <button
+      class="btn btn-dark-2 email"
+      (click)="closePopup()"
+      [disabled]="!email"
+    >
+      Enviar
+    </button>
+  </div>
+</div>
