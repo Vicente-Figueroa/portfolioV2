@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output  } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {
   HttpClient,
   HttpClientModule,
@@ -28,7 +28,7 @@ export class ChatComponent implements OnInit {
   showPopup = false; // Variable para controlar la visibilidad del popup
   @Output() closeChatEvent = new EventEmitter<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     // Animation
@@ -64,35 +64,47 @@ export class ChatComponent implements OnInit {
   }
 
   askQuestion() {
+    if (!this.question?.trim()) {
+      return; // No hacer nada si la pregunta está vacía o es solo espacios en blanco
+    }
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    if (this.question) {
-      const body = { question: this.question }; // Creamos un objeto con la pregunta del usuario
 
-      this.http
-        .post('https://apiv-pi.vercel.app/chat', body, { headers: headers })
-        .subscribe((response: any) => {
-          this.message = response.message
-            .replace(/```/g, '')
-            .replace(/\n/g, '');
-          this.conversation.push(`Tu: ${this.question}`); // Agregamos la pregunta del usuario a la conversación
-          this.conversation.push(this.message); // Agregamos la respuesta del backend a la conversación
-          console.log(this.message);
+    const body = { question: this.question.trim() }; // Eliminamos espacios en blanco innecesarios
 
-          this.question = '';
-          this.messageCount++; // Incrementamos el contador de mensajes
-          console.log(this.messageCount);
+    this.http.post('https://apiv-pi.vercel.app/chat', body, { headers: headers })
+      .subscribe({
+        next: (response: any) => {
+          const formattedMessage = this.formatResponse(response.message);
+          this.updateConversation(this.question, formattedMessage);
+          this.resetQuestion();
+        },
+        error: (error) => {
+          console.error('Error al enviar la pregunta:', error);
+          // Aquí podrías agregar lógica para notificar al usuario sobre el error
+        }
+      });
+  }
 
-          if (this.messageCount == 2) {
-            this.showPopup = true; // Mostramos el popup después de 3 mensajes
-          }
-          else{
-            this.showPopup = false; // Mostramos el popup después de 3 mensajes
+  // Formatea la respuesta del backend, eliminando caracteres no deseados
+  private formatResponse(message: string): string {
+    return message.replace(/```/g, '').replace(/\n/g, '').replace('**', '');
+  }
 
-          }
-        });
-    }
+  // Actualiza la conversación con la nueva pregunta y respuesta
+  private updateConversation(question: string, response: string): void {
+    this.conversation.push(`Tu: ${question}`);
+    this.conversation.push(response);
+    this.messageCount++;
+
+    this.showPopup = this.messageCount >= 2; // Mostrar el popup después de 2 mensajes
+  }
+
+  // Resetea la pregunta del usuario
+  private resetQuestion(): void {
+    this.question = '';
   }
   closePopup() {
     if (this.email) {
