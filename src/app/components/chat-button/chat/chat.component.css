@@ -45,15 +45,16 @@
   border-radius: 0 0 10px 10px;
 }
 
-.popup-content {
-  padding: 15px;
+/* Popup Message Styling */
+.popup-message {
   background-color: #ffffff;
+  border: 1px solid #007bff;
+  padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.popup-content input {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .btn-dark-2 {

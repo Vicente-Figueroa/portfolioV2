@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
   standalone: true,
   imports: [HttpClientModule, CommonModule, FormsModule],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.css',
+  styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
   message!: string;
@@ -27,6 +27,7 @@ export class ChatComponent implements OnInit {
   loading = true;
   messageCount = 0; // Cuenta los mensajes enviados
   showPopup = false; // Controla la visibilidad del popup
+  isEmailValid = false; // Controla la validez del correo electrónico
   @Output() closeChatEvent = new EventEmitter<void>();
 
   private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
@@ -103,7 +104,8 @@ export class ChatComponent implements OnInit {
     this.conversation.push(response);
     this.messageCount++;
 
-    this.showPopup = this.messageCount >= 2; // Mostrar el popup después de 2 mensajes
+    // Mostrar el popup después de 2 mensajes o si estás probando
+    this.showPopup = this.messageCount >= 3 || this.showPopup;
   }
 
   // Resetea la pregunta del usuario
@@ -111,8 +113,14 @@ export class ChatComponent implements OnInit {
     this.question = '';
   }
 
+  // Valida si el email tiene un formato válido
+  validateEmail(): void {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    this.isEmailValid = emailPattern.test(this.email);
+  }
+
   closePopup() {
-    if (this.email) {
+    if (this.isEmailValid) {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });

@@ -1,19 +1,43 @@
+<!-- Chat Header -->
 <div class="chat-popup-header">
   <h2>Asistente</h2>
   <button class="close-button" (click)="closeChat()">✖</button>
 </div>
 
+<!-- Chat Body -->
 <div class="chat-popup-body">
   <div *ngFor="let message of conversation" class="chat-message">
     <p>{{ message }}</p>
   </div>
+
+  <!-- Loading Spinner -->
   <div class="loading-spinner" *ngIf="loading">
     <div class="spinner-border" role="status">
       <span class="sr-only"></span>
     </div>
   </div>
+
+  <!-- Email Input Popup as a chat message -->
+  <div *ngIf="showPopup" class="chat-message popup-message">
+    <p>Si quieres seguir chateando, envíame un correo para que hablemos.</p>
+    <input
+      class="form-control"
+      type="email"
+      [(ngModel)]="email"
+      placeholder="Ingresa tu correo"
+      (ngModelChange)="validateEmail()"
+    />
+    <button
+      class="btn btn-dark-2 email"
+      (click)="closePopup()"
+      [disabled]="!isEmailValid"
+    >
+      Enviar
+    </button>
+  </div>
 </div>
 
+<!-- Chat Footer -->
 <div class="chat-popup-footer">
   <input
     class="form-control"
@@ -21,35 +45,14 @@
     [(ngModel)]="question"
     placeholder="Ingresa tu pregunta"
     (keyup.enter)="askQuestion()"
+    [disabled]="showPopup"
   />
   <button
     class="btn btn-dark-2 btn-lg"
     type="submit"
-    [disabled]="loading || !question"
+    [disabled]="loading || !question || showPopup"
     (click)="askQuestion()"
   >
     Enviar
   </button>
-</div>
-
-<!-- Popup -->
-<div class="popup" *ngIf="showPopup">
-  <div class="popup-content">
-    <p>
-      Si quieres seguir chateando, envíame un correo para que hablemos.
-    </p>
-    <input
-      class="form-control"
-      type="text"
-      [(ngModel)]="email"
-      placeholder="Ingresa tu correo"
-    />
-    <button
-      class="btn btn-dark-2 email"
-      (click)="closePopup()"
-      [disabled]="!email"
-    >
-      Enviar
-    </button>
-  </div>
 </div>
