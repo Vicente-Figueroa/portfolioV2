@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit {
     });
 
     this.http
-      .get(`${this.apiUrl}/chat/`, { headers: headers }) // Usamos la URL del entorno
+      .get(`${this.apiUrl}/api/chat/`, { headers: headers }) // Usamos la URL del entorno
       .subscribe((response: any) => {
         this.message = response.message.replace(/```/g, '').replace(/\n/g, '');
         this.conversation.push(this.message); // Agregamos el mensaje inicial a la conversación
@@ -78,7 +78,7 @@ export class ChatComponent implements OnInit {
 
     const body = { question: this.question.trim() }; // Eliminamos espacios en blanco innecesarios
 
-    this.http.post(`${this.apiUrl}/chat/`, body, { headers: headers }) // Usamos la URL del entorno
+    this.http.post(`${this.apiUrl}/api/chat/`, body, { headers: headers }) // Usamos la URL del entorno
       .subscribe({
         next: (response: any) => {
           const formattedMessage = this.formatResponse(response.message);
@@ -119,7 +119,7 @@ export class ChatComponent implements OnInit {
       const body = { email: this.email };
 
       this.http
-        .post(`${this.apiUrl}/send-email`, body, { headers: headers }) // Usamos la URL del entorno
+        .post(`${this.apiUrl}/api/send-email`, body, { headers: headers }) // Usamos la URL del entorno
         .subscribe(
           (response: any) => {
             console.log('Correo enviado:', response);
