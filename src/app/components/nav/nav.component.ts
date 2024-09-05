@@ -8,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
+  // Función para eliminar el token de onboarding
+  resetOnboarding() {
+    localStorage.removeItem('hasSeenOnboarding');
+    alert('El onboarding se ha reseteado. Recarga la página para verlo nuevamente.');
+    window.location.reload(); // Recargar la página automáticamente
+
+  }
 
 }

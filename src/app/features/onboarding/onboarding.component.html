@@ -1,0 +1,16 @@
+<div class="onboarding-backdrop" *ngIf="showOnboarding">
+    <div class="onboarding-container">
+        <button class="close-btn" (click)="closeOnboarding()">✖</button>
+        <!-- Botón de cerrar en la esquina superior derecha -->
+        <h2>Bienvenido</h2>
+        <p>
+            Soy Vicente Figueroa. <br />
+            <span class="chat-text">Siéntete libre de hablar con mi Asistente con IA. 💬 </span> <br />
+            Descubre más de mí en mi Instagram.
+        </p>
+        <a href="https://www.instagram.com/vicentefigueroa.ia/" target="_blank" class="instagram-link btn btn-dark-2">
+            <i class="fab fa-instagram"></i> Sígueme en Instagram
+        </a>
+        <button class="btn btn-primary" (click)="closeOnboarding()">Entendido</button>
+    </div>
+</div>
