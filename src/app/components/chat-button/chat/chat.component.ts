@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { environment } from '../../../../environments/environment';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,14 +22,16 @@ gsap.registerPlugin(ScrollTrigger);
 export class ChatComponent implements OnInit {
   message!: string;
   email!: string;
-  question!: string; // Agregamos una variable para almacenar la pregunta del usuario
-  conversation: string[] = []; // Agregamos un array para almacenar la conversación
+  question!: string; // Almacena la pregunta del usuario
+  conversation: string[] = []; // Almacena la conversación
   loading = true;
-  messageCount = 0; // Agregamos una variable para contar los mensajes enviados
-  showPopup = false; // Variable para controlar la visibilidad del popup
+  messageCount = 0; // Cuenta los mensajes enviados
+  showPopup = false; // Controla la visibilidad del popup
   @Output() closeChatEvent = new EventEmitter<void>();
 
-  constructor(private http: HttpClient) { }
+  private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     // Animation
@@ -40,7 +43,7 @@ export class ChatComponent implements OnInit {
         y: '0%', // Volver a la posición original en Y
         duration: 3,
         scrollTrigger: {
-          trigger: '.projects', // El trigger ahora es la propia sección ".projects"
+          trigger: '.projects', // El trigger es la propia sección ".projects"
           start: 'top 80%',
           toggleActions: 'play none none reverse',
         },
@@ -48,13 +51,14 @@ export class ChatComponent implements OnInit {
     );
     this.getInitialMessage(); // Llamamos a la función para obtener el mensaje inicial
   }
+
   getInitialMessage() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
     this.http
-      .get('https://apiv-pi.vercel.app/chat', { headers: headers })
+      .get(`${this.apiUrl}/api/chat/`, { headers: headers }) // Usamos la URL del entorno
       .subscribe((response: any) => {
         this.message = response.message.replace(/```/g, '').replace(/\n/g, '');
         this.conversation.push(this.message); // Agregamos el mensaje inicial a la conversación
@@ -74,7 +78,7 @@ export class ChatComponent implements OnInit {
 
     const body = { question: this.question.trim() }; // Eliminamos espacios en blanco innecesarios
 
-    this.http.post('https://apiv-pi.vercel.app/chat', body, { headers: headers })
+    this.http.post(`${this.apiUrl}/api/chat/`, body, { headers: headers }) // Usamos la URL del entorno
       .subscribe({
         next: (response: any) => {
           const formattedMessage = this.formatResponse(response.message);
@@ -106,6 +110,7 @@ export class ChatComponent implements OnInit {
   private resetQuestion(): void {
     this.question = '';
   }
+
   closePopup() {
     if (this.email) {
       const headers = new HttpHeaders({
@@ -114,9 +119,7 @@ export class ChatComponent implements OnInit {
       const body = { email: this.email };
 
       this.http
-        .post('https://apiv-pi.vercel.app/send-email', body, {
-          headers: headers,
-        })
+        .post(`${this.apiUrl}/api/send-email`, body, { headers: headers }) // Usamos la URL del entorno
         .subscribe(
           (response: any) => {
             console.log('Correo enviado:', response);
@@ -130,6 +133,7 @@ export class ChatComponent implements OnInit {
         );
     }
   }
+
   closeChat() {
     this.closeChatEvent.emit(); // Emitimos el evento para cerrar el chat
   }

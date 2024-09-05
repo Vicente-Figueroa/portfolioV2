@@ -60,7 +60,7 @@ export class ContactComponent {
       'Content-Type': 'application/json',
     });
     this.http
-      .post('https://apiv-pi.vercel.app/items', contactData, {
+      .post('http://127.0.0.1:8000/api/items/', contactData, {
         headers: headers,
       })
       .subscribe(
