@@ -61,3 +61,35 @@
   background-color: #343a40;
   color: white;
 }
+
+.chat-popup-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.clear-conversation-btn {
+  background-color: transparent;
+  color: #ff6f61;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  padding: 0;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+}
+
+.clear-conversation-btn:hover {
+  color: #e24c3d;
+}
+
+.clear-conversation-btn:focus {
+  outline: none;
+}

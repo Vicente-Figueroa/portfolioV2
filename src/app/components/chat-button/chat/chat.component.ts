@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
-
 @Component({
   selector: 'app-chat',
   standalone: true,
@@ -29,10 +28,13 @@ export class ChatComponent implements OnInit {
 
   private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getInitialMessage(); // Llamamos a la función para obtener el mensaje inicial
+    this.loadConversation(); // Cargar cualquier conversación guardada
+    if (this.conversation.length === 0) {
+      this.getInitialMessage(); // Llamamos a la función para obtener el mensaje inicial solo si no hay conversación previa
+    }
   }
 
   getInitialMessage() {
@@ -46,6 +48,7 @@ export class ChatComponent implements OnInit {
         this.message = response.message.replace(/```/g, '').replace(/\n/g, '');
         this.conversation.push(this.message); // Agregamos el mensaje inicial a la conversación
         console.log(this.message);
+        this.saveConversation(); // Guardar la conversación en localStorage
         this.loading = false;
       });
   }
@@ -86,13 +89,45 @@ export class ChatComponent implements OnInit {
     this.conversation.push(response);
     this.messageCount++;
 
-    // Mostrar el popup después de 2 mensajes o si estás probando
+    // Guardar la conversación en localStorage
+    this.saveConversation();
+
+    // Mostrar el popup después de 3 mensajes
     this.showPopup = this.messageCount >= 3 || this.showPopup;
   }
 
   // Resetea la pregunta del usuario
   private resetQuestion(): void {
     this.question = '';
+  }
+
+  // Guardar la conversación en localStorage
+  private saveConversation(): void {
+    localStorage.setItem('chatConversation', JSON.stringify(this.conversation));
+    localStorage.setItem('messageCount', this.messageCount.toString());
+  }
+
+  // Cargar la conversación guardada en localStorage
+  private loadConversation(): void {
+    const savedConversation = localStorage.getItem('chatConversation');
+    const savedMessageCount = localStorage.getItem('messageCount');
+
+    if (savedConversation) {
+      this.conversation = JSON.parse(savedConversation);
+      this.messageCount = savedMessageCount ? parseInt(savedMessageCount, 10) : 0;
+      this.loading = false; // Si se carga una conversación, no es necesario mostrar el mensaje de carga inicial
+    }
+  }
+
+  // Limpiar la conversación guardada en localStorage y en la pantalla
+  clearConversation(): void {
+    // Limpiar el localStorage
+    localStorage.removeItem('chatConversation');
+    localStorage.removeItem('messageCount');
+
+    // Limpiar la conversación en la pantalla
+    this.conversation = [];
+    this.messageCount = 0;
   }
 
   // Valida si el email tiene un formato válido
