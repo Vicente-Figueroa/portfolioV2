@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -26,6 +26,8 @@ export class ContactComponent {
   submitted = false;
   showSuccessMessage = false;
   name!: string;
+  private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
+
 
   constructor(private http: HttpClient) { }
   ngOnInit() {
@@ -57,7 +59,7 @@ export class ContactComponent {
       'Content-Type': 'application/json',
     });
     this.http
-      .post('http://127.0.0.1:8000/api/items/', contactData, {
+      .post(`${this.apiUrl}/api/items/`, contactData, {
         headers: headers,
       })
       .subscribe(

@@ -144,7 +144,7 @@ export class ChatComponent implements OnInit {
       const body = { email: this.email };
 
       this.http
-        .post(`${this.apiUrl}/api/send-email`, body, { headers: headers }) // Usamos la URL del entorno
+        .post(`${this.apiUrl}/api/send-email/`, body, { headers: headers }) // Usamos la URL del entorno
         .subscribe(
           (response: any) => {
             console.log('Correo enviado:', response);
