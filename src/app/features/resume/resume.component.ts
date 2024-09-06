@@ -4,10 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CardsComponent } from './cards/cards.component';
 import { Resume } from '../../models/resume';
 import { ProjectsComponent } from '../projects/projects.component';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-resume',

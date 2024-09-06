@@ -6,10 +6,7 @@ import {
 } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-contact',

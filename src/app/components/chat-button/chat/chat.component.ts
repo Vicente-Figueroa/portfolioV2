@@ -6,11 +6,8 @@ import {
 } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import { environment } from '../../../../environments/environment';
 
-gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-chat',
@@ -35,21 +32,6 @@ export class ChatComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    // Animation
-    gsap.fromTo(
-      '.chat',
-      { opacity: 0 }, // Estado inicial: transparente y ligeramente desplazado hacia arriba
-      {
-        opacity: 1, // Estado final: opacidad total
-        y: '0%', // Volver a la posición original en Y
-        duration: 3,
-        scrollTrigger: {
-          trigger: '.projects', // El trigger es la propia sección ".projects"
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
     this.getInitialMessage(); // Llamamos a la función para obtener el mensaje inicial
   }
 
