@@ -1,18 +1,17 @@
 <!-- Project Card 1-->
 <div class="card overflow-hidden shadow rounded-4 border-0 mb-5 lg-screen">
     <div class="card-body p-0">
-        <div class="d-flex align-items-center ">
+        <div class="d-flex align-items-center">
             <div class="p-5">
                 <h2 class="fw-bolder">{{name}}</h2>
                 <p>{{description}}</p>
-
-                <h2 class="small fw-bolder">Tecnologias</h2>
+                <h2 class="small fw-bolder">Tecnologías</h2>
                 <p>{{tecnologies}}</p>
                 <div *ngIf="link">
                     <a [href]="link" target="_blank">Ejemplo</a>
                 </div>
             </div>
-            <img class="img-fluid" src={{image}} alt="..." />
+            <img class="img-fluid" src={{image}} alt="..." (click)="openLightbox($event)" />
         </div>
     </div>
 </div>
@@ -23,19 +22,18 @@
         <div class="row align-items-center gx-5">
             <div class="col text-center text-lg-start mb-4 mb-lg-0">
                 <div class="bg-light p-4 rounded-4">
-                    <img class="img-fluid" src={{image}} alt="..." />
+                    <img class="img-fluid" src={{image}} alt="..." (click)="openLightbox($event)" />
                     <div class="text-primary fw-bolder">{{name}}</div>
                     <div *ngIf="link">
                         <a [href]="link" target="_blank" class="btn btn-danger m-2">Ejemplo</a>
                     </div>
-                    <h2 class="small fw-bolder">Tecnologias</h2>
+                    <h2 class="small fw-bolder">Tecnologías</h2>
                     <p class="small">{{tecnologies}}</p>
                     <button class="btn btn-dark" (click)="toggleDescription()">
                         {{showMore ? 'Ocultar' : 'Ver descripción'}}
                     </button>
                 </div>
-            </div> <!-- Botón "Ver más" -->
-
+            </div>
             <div class="col-lg-8">
                 <div class="text-muted text-center">
                     <!-- Contenido oculto -->
@@ -43,9 +41,13 @@
                         {{description}}
                     </span>
                 </div>
-
             </div>
-
         </div>
     </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" (click)="closeLightbox()">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" />
 </div>

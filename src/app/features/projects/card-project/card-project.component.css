@@ -53,10 +53,72 @@
         display: none;
         visibility: visible;
     }
+
+}
+
+.img-fluid {
+    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    max-width: 3000px; /* Limite máximo de ancho */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Esto elimina cualquier espacio en blanco bajo la imagen */
+    margin: 0 auto; /* Centra la imagen si el contenedor es más grande */
 }
 
 @media only screen and (min-width: 769px) {
     .btn-ver-mas {
         display: none;
     }
+}
+
+/* Estilos para el Lightbox */
+.lightbox {
+    display: none; /* Ocultamos el lightbox por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    margin-top: 200px;
+}
+
+.close {
+    position: absolute;
+    margin-top: 100px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animación de la imagen */
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.lightbox-content {
+    animation-name: zoom;
+    animation-duration: 0.6s;
 }
