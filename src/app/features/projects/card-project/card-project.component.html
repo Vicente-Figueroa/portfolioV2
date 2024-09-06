@@ -11,18 +11,28 @@
                     <a [href]="link" target="_blank">Ejemplo</a>
                 </div>
             </div>
-            <img class="img-fluid" src={{image}} alt="..." (click)="openLightbox($event)" />
+            <div class="position-relative">
+                <!-- Contenedor de la imagen y el ícono -->
+                <img class="img-fluid" src={{image}} alt="..." (click)="openLightbox($event)" />
+    
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Experience Card 1-->
+<!-- Experience Card 1 -->
 <div class="card shadow border-0 rounded-4 mb-5 sm-screen">
     <div class="card-body p-5">
         <div class="row align-items-center gx-5">
             <div class="col text-center text-lg-start mb-4 mb-lg-0">
                 <div class="bg-light p-4 rounded-4">
-                    <img class="img-fluid" src={{image}} alt="..." (click)="openLightbox($event)" />
+                    <div class="position-relative">
+                        <!-- Contenedor de la imagen y el ícono -->
+                        <img class="img-fluid-2" src={{image}} alt="..." (click)="openLightbox($event)" />
+                        <div class="click-icon">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i><!-- Ícono de mano clickeable -->
+                        </div>
+                    </div>
                     <div class="text-primary fw-bolder">{{name}}</div>
                     <div *ngIf="link">
                         <a [href]="link" target="_blank" class="btn btn-danger m-2">Ejemplo</a>

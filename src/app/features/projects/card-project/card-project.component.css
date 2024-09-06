@@ -56,7 +56,7 @@
 
 }
 
-.img-fluid {
+.img-fluid-2{
     width: 100%; /* La imagen ocupará el 100% del contenedor */
     max-width: 3000px; /* Limite máximo de ancho */
     height: auto; /* Mantiene la proporción de la imagen */
@@ -121,4 +121,32 @@
 .lightbox-content {
     animation-name: zoom;
     animation-duration: 0.6s;
+}
+
+/* Contenedor de la imagen y el ícono */
+.position-relative {
+    position: relative;
+}
+
+.click-icon {
+    position: absolute;
+    top: -10px; /* Ajusta la distancia desde la parte superior */
+    right: -10px; /* Ajusta la distancia desde la parte derecha */
+    font-size: 1.5rem; /* Tamaño del ícono */
+    color: rgba(255, 0, 0, 0.85); /* Color azul con algo de transparencia */
+    pointer-events: none; /* No bloqueará el clic en la imagen */
+}
+
+.img-fluid {
+    cursor: pointer; /* Cambiar el cursor a mano */
+}
+
+.click-icon i {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900; /* Asegura que se use la versión sólida del ícono */
+}
+
+/* Opcional: Cambiar el color del ícono al pasar el ratón */
+.img-fluid:hover ~ .click-icon i {
+    color: rgba(0, 123, 255, 1); /* Aumentar la opacidad al 100% al pasar el mouse */
 }
