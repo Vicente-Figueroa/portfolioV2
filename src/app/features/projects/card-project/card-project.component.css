@@ -133,7 +133,7 @@
     top: -10px; /* Ajusta la distancia desde la parte superior */
     right: -10px; /* Ajusta la distancia desde la parte derecha */
     font-size: 1.5rem; /* Tamaño del ícono */
-    color: rgba(255, 0, 0, 0.85); /* Color azul con algo de transparencia */
+    color: rgba(0, 64, 255, 0.85); /* Color azul con algo de transparencia */
     pointer-events: none; /* No bloqueará el clic en la imagen */
 }
 
