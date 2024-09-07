@@ -11,7 +11,7 @@ export class NavComponent {
   // Función para eliminar el token de onboarding
   resetOnboarding() {
     localStorage.removeItem('hasSeenOnboarding');
-    alert('El onboarding se ha reseteado. Recarga la página para verlo nuevamente.');
+    alert('Se recargara la pagina !');
     window.location.reload(); // Recargar la página automáticamente
 
   }

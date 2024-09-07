@@ -19,7 +19,7 @@ export class OnboardingComponent implements OnInit {
       // Retraso de 3 segundos antes de mostrar el onboarding
       setTimeout(() => {
         this.showOnboarding = true;
-      }, 3000); // 3000 milisegundos = 3 segundos
+      }, 2500); // 3000 milisegundos = 3 segundos
     }
   }
 
