@@ -9,7 +9,15 @@
   <div *ngFor="let message of conversation" class="chat-message">
     <p>{{ message }}</p>
   </div>
-
+  <!-- Mostrar el botón de WhatsApp si no ha sido cerrado -->
+  <div *ngIf="!isWhatsAppClosed" class="whatsapp-container">
+    <p>Si prefieres, puedes contactarme en WhatsApp:</p>
+    <a [href]="whatsappLink" target="_blank">
+      <button type="button" class="whatsapp-button">Ir a WhatsApp</button>
+    </a>
+    <!-- Botón para cerrar el mensaje de WhatsApp -->
+    <button (click)="closeWhatsAppMessage()" class="close-whatsapp">X</button>
+  </div>
   <!-- Loading Spinner -->
   <div class="loading-spinner" *ngIf="loading">
     <div class="spinner-border" role="status">

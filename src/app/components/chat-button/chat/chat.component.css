@@ -93,3 +93,46 @@
 .clear-conversation-btn:focus {
   outline: none;
 }
+
+.whatsapp-container {
+  position: relative;
+  text-align: center;
+  margin: 15px 0;
+  padding: 20px;
+  /* Aumento del padding para separar mejor el contenido */
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.whatsapp-button {
+  background-color: #25D366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe57;
+}
+
+.close-whatsapp {
+  position: absolute;
+  top: 5px;
+  /* Ajuste para alejarlo del contenido */
+  right: 5px;
+  /* Ajuste para alinearlo mejor */
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 14px;
+  /* Reducimos el tamaño de la "X" */
+  cursor: pointer;
+}
+
+.close-whatsapp:hover {
+  color: #000;
+}

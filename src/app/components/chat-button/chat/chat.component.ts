@@ -14,7 +14,8 @@ import { environment } from '../../../../environments/environment';
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
-}) export class ChatComponent implements OnInit {
+})
+export class ChatComponent implements OnInit {
   message!: string;
   email!: string;
   question!: string; // Almacena la pregunta del usuario
@@ -23,7 +24,10 @@ import { environment } from '../../../../environments/environment';
   messageCount = 0; // Cuenta los mensajes enviados
   showPopup = false; // Controla la visibilidad del popup
   isEmailValid = false; // Controla la validez del correo electrónico
-  emailSent = false; // Nueva variable para controlar si ya se envió el correo
+  emailSent = false; // Controla si el correo ya fue enviado
+  showWhatsAppButton = true; // Mostrar el botón de WhatsApp por defecto
+  whatsappLink = 'https://wa.me/56974104013?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20tus%20servicios.';
+  isWhatsAppClosed = false; // Controla si el mensaje de WhatsApp ha sido cerrado
   @Output() closeChatEvent = new EventEmitter<void>();
 
   private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
@@ -33,6 +37,7 @@ import { environment } from '../../../../environments/environment';
   ngOnInit(): void {
     this.loadConversation(); // Cargar cualquier conversación guardada
     this.loadPopupState();   // Cargar el estado del popup y si ya se envió el correo
+    this.loadWhatsAppState(); // Cargar el estado del mensaje de WhatsApp
 
     if (this.conversation.length === 0) {
       this.getInitialMessage(); // Llamamos a la función para obtener el mensaje inicial solo si no hay conversación previa
@@ -49,6 +54,7 @@ import { environment } from '../../../../environments/environment';
       .subscribe((response: any) => {
         this.message = response.message.replace(/```/g, '').replace(/\n/g, '');
         this.conversation.push(this.message); // Agregamos el mensaje inicial a la conversación
+
         this.saveConversation(); // Guardar la conversación en localStorage
         this.loading = false;
       });
@@ -117,13 +123,11 @@ import { environment } from '../../../../environments/environment';
     }
   }
 
-  // Nueva función para guardar el estado del popup y si el correo fue enviado en el localStorage
   private savePopupState(): void {
     localStorage.setItem('showPopup', JSON.stringify(this.showPopup));
     localStorage.setItem('emailSent', JSON.stringify(this.emailSent)); // Guardar si ya se envió el correo
   }
 
-  // Nueva función para cargar el estado del popup y si el correo ya fue enviado desde el localStorage
   private loadPopupState(): void {
     const savedPopupState = localStorage.getItem('showPopup');
     const emailSentState = localStorage.getItem('emailSent');
@@ -131,15 +135,28 @@ import { environment } from '../../../../environments/environment';
     this.emailSent = emailSentState ? JSON.parse(emailSentState) : false; // Cargar si ya se envió el correo
   }
 
+  // Nueva función para cerrar el mensaje de WhatsApp
+  closeWhatsAppMessage(): void {
+    this.isWhatsAppClosed = true;
+    localStorage.setItem('isWhatsAppClosed', JSON.stringify(this.isWhatsAppClosed));
+  }
+
+  // Cargar el estado del mensaje de WhatsApp desde localStorage
+  loadWhatsAppState(): void {
+    const savedWhatsAppState = localStorage.getItem('isWhatsAppClosed');
+    this.isWhatsAppClosed = savedWhatsAppState ? JSON.parse(savedWhatsAppState) : false;
+  }
+
   clearConversation(): void {
-    // Limpiar el localStorage
     localStorage.removeItem('chatConversation');
     localStorage.removeItem('messageCount');
+    localStorage.removeItem('isWhatsAppClosed');
 
     // Limpiar la conversación en la pantalla
     this.conversation = [];
     this.messageCount = 0;
     this.showPopup = false;
+    this.isWhatsAppClosed = false;
   }
 
   validateEmail(): void {
