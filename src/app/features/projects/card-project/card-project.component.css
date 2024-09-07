@@ -56,23 +56,62 @@
 
 }
 
-.img-fluid-2{
-    width: 100%; /* La imagen ocupará el 100% del contenedor */
-    max-width: 3000px; /* Limite máximo de ancho */
-    height: auto; /* Mantiene la proporción de la imagen */
-    display: block; /* Esto elimina cualquier espacio en blanco bajo la imagen */
-    margin: 0 auto; /* Centra la imagen si el contenedor es más grande */
-}
-
 @media only screen and (min-width: 769px) {
     .btn-ver-mas {
         display: none;
+    }
+
+    /* Asegurar que el contenedor de la imagen tiene un tamaño definido */
+    .image-container {
+        width: 100%;
+        /* Ancho completo del contenedor padre */
+        height: 300px;
+        /* Definimos una altura fija para que la imagen ocupe su espacio */
+        position: relative;
+        overflow: hidden;
+        /* Evitar que el contenido de la imagen sobresalga */
+        flex-grow: 1;
+        /* Permitir que el contenedor crezca para llenar el espacio disponible */
+    }
+
+    /* Aseguramos que la imagen cubra el contenedor, cortando si es necesario */
+    .img {
+        max-width: 25vw;
+        /* Asegura que la imagen ocupe todo el ancho del contenedor */
+
+        object-fit: cover;
+        /* Esto hará que la imagen se corte si no encaja, manteniendo las proporciones */
+        object-position: center;
+        /* Centrar la imagen en el contenedor */
+        cursor: pointer;
+        /* Cambiar el cursor a mano */
+        margin-right: 20px;
+    }
+
+    /* Aseguramos que el ícono de lupa esté bien ubicado */
+    .click-icon {
+        position: absolute;
+        top: 10px;
+        /* Ajustamos la distancia desde la parte superior */
+        margin-right: 25px;
+        /* Ajustamos la distancia desde la parte derecha */
+        font-size: 2rem;
+        color: rgba(0, 64, 255, 0.85);
+        /* Color azul con algo de transparencia */
+        pointer-events: none;
+        /* No bloqueará el clic en la imagen */
+    }
+
+    /* Ajustamos el color del ícono cuando se pasa el cursor sobre la imagen */
+    .img-fluid:hover~.click-icon i {
+        color: rgba(0, 123, 255, 1);
     }
 }
 
 /* Estilos para el Lightbox */
 .lightbox {
-    display: none; /* Ocultamos el lightbox por defecto */
+    display: none;
+    /* Ocultamos el lightbox por defecto */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -113,6 +152,7 @@
     from {
         transform: scale(0);
     }
+
     to {
         transform: scale(1);
     }
@@ -130,23 +170,31 @@
 
 .click-icon {
     position: absolute;
-    top: -10px; /* Ajusta la distancia desde la parte superior */
-    right: -10px; /* Ajusta la distancia desde la parte derecha */
-    font-size: 1.5rem; /* Tamaño del ícono */
-    color: rgba(0, 64, 255, 0.85); /* Color azul con algo de transparencia */
-    pointer-events: none; /* No bloqueará el clic en la imagen */
+    top: -10px;
+    /* Ajusta la distancia desde la parte superior */
+    right: -10px;
+    /* Ajusta la distancia desde la parte derecha */
+    font-size: 1.5rem;
+    /* Tamaño del ícono */
+    color: rgba(0, 64, 255, 0.85);
+    /* Color azul con algo de transparencia */
+    pointer-events: none;
+    /* No bloqueará el clic en la imagen */
 }
 
 .img-fluid {
-    cursor: pointer; /* Cambiar el cursor a mano */
+    cursor: pointer;
+    /* Cambiar el cursor a mano */
 }
 
 .click-icon i {
     font-family: "Font Awesome 5 Free";
-    font-weight: 900; /* Asegura que se use la versión sólida del ícono */
+    font-weight: 900;
+    /* Asegura que se use la versión sólida del ícono */
 }
 
 /* Opcional: Cambiar el color del ícono al pasar el ratón */
-.img-fluid:hover ~ .click-icon i {
-    color: rgba(0, 123, 255, 1); /* Aumentar la opacidad al 100% al pasar el mouse */
+.img-fluid:hover~.click-icon i {
+    color: rgba(0, 123, 255, 1);
+    /* Aumentar la opacidad al 100% al pasar el mouse */
 }
