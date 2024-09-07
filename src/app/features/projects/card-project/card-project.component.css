@@ -108,61 +108,6 @@
     }
 }
 
-/* Estilos para el Lightbox */
-.lightbox {
-    display: none;
-    /* Ocultamos el lightbox por defecto */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-.lightbox-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    margin-top: 200px;
-}
-
-.close {
-    position: absolute;
-    margin-top: 100px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Animación de la imagen */
-@keyframes zoom {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
-}
-
-.lightbox-content {
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
-
 /* Contenedor de la imagen y el ícono */
 .position-relative {
     position: relative;
@@ -197,4 +142,169 @@
 .img-fluid:hover~.click-icon i {
     color: rgba(0, 123, 255, 1);
     /* Aumentar la opacidad al 100% al pasar el mouse */
+}
+
+
+
+
+/* Estilos para el Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    box-sizing: border-box;
+    /* Asegura que el lightbox cubre toda la pantalla */
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Contenedor de la imagen y el texto */
+.lightbox-content-wrapper {
+    max-width: 900px;
+    /* Ajuste del ancho máximo */
+    margin: auto;
+    background-color: #fff;
+    border-radius: 15px;
+    /* Bordes más redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    /* Ajuste de sombra */
+    padding: 20px;
+    box-sizing: border-box;
+    animation: zoomIn 0.5s ease-out;
+    transform: scale(0.95);
+    transform-origin: center center;
+    margin-top: 50px;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Imagen con marco elegante */
+.lightbox-content {
+    width: 100%;
+    height: auto;
+    max-width: 850px;
+    /* Ancho máximo para la imagen */
+    max-height: 450px;
+    /* Altura máxima */
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0;
+    /* Borde más delgado */
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+/* Estilo del texto debajo de la imagen */
+.lightbox-caption {
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    max-width: 850px;
+    margin: auto;
+}
+
+/* Descripción del proyecto */
+.lightbox-caption p {
+    background-color: #fff;
+    /* Fondo blanco */
+    padding: 15px;
+    /* Espaciado interno */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    line-height: 1.6;
+    margin: 10px 0;
+    color: #666;
+    font-size: 1rem;
+    /* Ajuste del tamaño de la fuente */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+}
+
+/* Título de las tecnologías */
+.lightbox-caption h2 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+/* Lista de tecnologías */
+.lightbox-caption .technologies {
+    font-size: 0.95rem;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Animación para el Lightbox (fondo) */
+@keyframes fadeIn {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+}
+
+/* Animación de zoom para el contenido */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Botón de cierre */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #bbb;
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .lightbox-content-wrapper {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .lightbox-content {
+        max-width: 100%;
+        max-height: 300px;
+    }
+
+    .lightbox-caption {
+        max-width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .lightbox-caption h2 {
+        font-size: 1rem;
+    }
+
+    .lightbox-caption .technologies {
+        font-size: 0.85rem;
+    }
+
+    /* Contenedor de la imagen y el texto */
+    .lightbox-content-wrapper {
+
+        margin-top: 90px;
+    }
 }

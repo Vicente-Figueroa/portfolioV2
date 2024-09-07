@@ -12,8 +12,9 @@
                 </div>
             </div>
             <div class="position-relative">
-                <!-- Contenedor de la imagen y el ícono -->
-                <img class="img" src={{image}} alt="..." (click)="openLightbox($event)" />
+                <!-- Imagen que abre el lightbox con la imagen y la descripción -->
+                <img [src]="image" (click)="openLightbox(image, description)" alt="{{name}}" />
+
                 <!-- Añadimos el ícono de lupa en la versión grande -->
                 <div class="click-icon">
                     <i class="fa-solid fa-magnifying-glass-plus"></i>
@@ -30,8 +31,10 @@
             <div class="col text-center text-lg-start mb-4 mb-lg-0">
                 <div class="bg-light p-4 rounded-4">
                     <div class="position-relative">
-                        <!-- Contenedor de la imagen y el ícono -->
-                        <img class="img-fluid-2" src={{image}} alt="..." (click)="openLightbox($event)" />
+                        <!-- Imagen que abre el lightbox con la imagen y la descripción -->
+                        <img [src]="image" class="img-fluid" (click)="openLightbox(image, description)"
+                            alt="{{name}}" />
+
                         <div class="click-icon">
                             <i class="fa-solid fa-magnifying-glass-plus"></i><!-- Ícono de mano clickeable -->
                         </div>
@@ -61,6 +64,13 @@
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" (click)="closeLightbox()">
-    <span class="close">&times;</span>
-    <img class="lightbox-content" id="lightbox-img" />
-</div>
+    <span class="close" (click)="closeLightbox()">&times;</span>
+    <div class="lightbox-content-wrapper">
+      <img id="lightbox-img" class="lightbox-content" src="" alt="Descripción de la imagen">
+      <div class="lightbox-caption">
+        <p id="lightbox-description">
+          <!-- Aquí se cargará la descripción dinámica -->
+        </p>
+      </div>
+    </div>
+  </div>
