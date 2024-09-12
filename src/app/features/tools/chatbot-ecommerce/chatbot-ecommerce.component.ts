@@ -19,6 +19,11 @@ export class ChatbotEcommerceComponent {
 
   constructor(private http: HttpClient) { }
 
+  sendSuggestion(suggestion: string) {
+    this.userInput = suggestion;
+    this.sendMessage();
+  }
+
   sendMessage() {
     if (this.userInput.trim() === '') return;
 
@@ -45,16 +50,40 @@ export class ChatbotEcommerceComponent {
 
   private processResponse(response: any) {
     let message = `Intención detectada: ${response.intent}\n`;
-  
-    if (response.productos && response.productos.length > 0) {
-      message += 'Productos encontrados en la solicitud:\n';
-      response.productos.forEach((producto: [string, number]) => {
-        message += `- ${producto[0]} (probabilidad: ${producto[1]}%)\n`;
-      });
+
+    if (response.intent === 'consulta_producto') {
+      if (response.productos && response.productos.length > 0) {
+        message += 'Productos encontrados:\n';
+        response.productos.forEach((producto: [string, number]) => {
+          message += `- ${producto[0]} (probabilidad: ${producto[1]}%)\n`;
+        });
+      } else {
+        message += 'No se encontraron productos que coincidan con tu búsqueda.';
+      }
     } else {
-      message += 'No se encontraron productos específicos en la solicitud.';
+      // Manejo de otras intenciones
+      if (response.productos && response.productos.length > 0) {
+        message += 'Productos mencionados en la solicitud:\n';
+        response.productos.forEach((producto: [string, number]) => {
+          message += `- ${producto[0]} (probabilidad: ${producto[1]}%)\n`;
+        });
+      }
     }
-  
+
+    // Agregar información adicional específica de la intención
+    switch (response.intent) {
+      case 'envio_seguimiento':
+        message += '\nPara seguimiento de envío, por favor proporciona el número de orden.';
+        break;
+      case 'proceso_devolucion':
+        message += '\nPara iniciar una devolución, necesitamos el número de orden y el motivo.';
+        break;
+      case 'informacion_compra':
+        message += '\nPara obtener información de compra, por favor proporciona el número de orden.';
+        break;
+      // Puedes agregar más casos según sea necesario
+    }
+
     this.conversation.push(`Chatbot: ${message}`);
   }
 }
