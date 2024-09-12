@@ -11,21 +11,30 @@
                 <p class="lead fw-normal text-muted mb-0">Reconocimiento de intención y productos</p>
             </div>
 
-            <!-- Chatbot description -->
-            <div class="alert alert-info mb-4" role="alert">
-                <h4 class="alert-heading">Bienvenido a nuestro Proto-Chatbot de E-commerce</h4>
-                <p>Este prototipo reconoce la intención de tus preguntas y los productos mencionados en el contexto de
-                    una tienda de tecnología online. Muestra la intención detectada y los productos identificados en tu
-                    consulta.</p>
+            <!-- Chatbot description toggle -->
+            <div class="mb-4">
+                <button class="btn btn-info w-100 text-left d-flex justify-content-between align-items-center"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#chatbotDescription" aria-expanded="false"
+                    aria-controls="chatbotDescription">
+                    <span>Descripción del Chatbot</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
 
+                <div class="collapse" id="chatbotDescription">
+                    <div class="card card-body mt-2">
+                        <h4 class="card-title">Bienvenido a nuestro Proto-Chatbot de E-commerce</h4>
+                        <p class="card-text">Este prototipo reconoce la intención de tus preguntas y los productos
+                            mencionados, en el contexto de una tienda de tecnología online.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Conversation area -->
-            <div class="conversation-area mb-4"
-                style="height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: #f8f9fa;">
+            <div #conversationContainer class="conversation-area mb-4"
+                style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; padding-bottom: 20px; background-color: #f8f9fa;">
                 <div *ngFor="let message of conversation" class="mb-3">
                     <div *ngIf="message.startsWith('Usuario:')" class="text-end">
-                        <span class="bg-primary text-white py-2 px-3 rounded-pill d-inline-block">
+                        <span class="bg-primary text-white py-2 px-3  d-inline-block user-message">
                             {{ message }}
                         </span>
                     </div>
@@ -47,52 +56,74 @@
                     <i class="bi bi-send"></i> Enviar
                 </button>
             </div>
-
             <p class="mb-2">Sugerencias de preguntas:</p>
-            <div class="d-flex flex-wrap gap-2">
+            <div class="d-flex flex-wrap gap-2 mb-2">
                 <button class="btn btn-outline-primary btn-sm"
                     (click)="sendSuggestion('¿Cuándo llega el nuevo modelo de iPhone?')">¿Cuándo llega el nuevo modelo
                     de iPhone?</button>
                 <button class="btn btn-outline-primary btn-sm"
                     (click)="sendSuggestion('¿Tienen laptops gaming en oferta?')">¿Tienen laptops gaming en
                     oferta?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Cómo puedo rastrear mi pedido?')">¿Cómo puedo rastrear mi pedido?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Cuál es la mejor tablet para estudiantes?')">¿Cuál es la mejor tablet para
-                    estudiantes?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Ofrecen garantía extendida para TVs?')">¿Ofrecen garantía extendida para
-                    TVs?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Tienen el PlayStation 5 en stock?')">¿Tienen el PlayStation 5 en
-                    stock?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Cuál es su política de devoluciones?')">¿Cuál es su política de
-                    devoluciones?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Qué celular me recomiendan por $300?')">¿Qué celular me recomiendan por
-                    $300?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Hacen envíos gratis en compras grandes?')">¿Hacen envíos gratis en compras
-                    grandes?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Tienen servicio técnico para computadoras?')">¿Tienen servicio técnico
-                    para computadoras?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Cuándo es su próxima venta de tecnología?')">¿Cuándo es su próxima venta
-                    de tecnología?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Qué opciones de pago aceptan?')">¿Qué opciones de pago aceptan?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Tienen auriculares inalámbricos?')">¿Tienen auriculares
-                    inalámbricos?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Cómo funciona la garantía de fábrica?')">¿Cómo funciona la garantía de
-                    fábrica?</button>
-                <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Venden tarjetas de memoria para cámaras?')">¿Venden tarjetas de memoria
-                    para cámaras?</button>
+            </div>
+
+            <button class="btn btn-link btn-sm mb-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#moreSuggestions" aria-expanded="false" aria-controls="moreSuggestions">
+                <i class="fas fa-chevron-down when-closed"></i>
+                <span class="when-closed">Ver más </span>
+                <br>
+                <i class="fas fa-chevron-up when-open"></i>
+
+                <span class="when-open">Ver menos </span>
+            </button>
+
+            <div class="collapse" id="moreSuggestions">
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Cómo puedo rastrear mi pedido?')">¿Cómo puedo rastrear mi
+                        pedido?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Cuál es la mejor tablet para estudiantes?')">¿Cuál es la mejor tablet
+                        para
+                        estudiantes?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Ofrecen garantía extendida para TVs?')">¿Ofrecen garantía extendida
+                        para
+                        TVs?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Tienen el PlayStation 5 en stock?')">¿Tienen el PlayStation 5 en
+                        stock?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Cuál es su política de devoluciones?')">¿Cuál es su política de
+                        devoluciones?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Qué celular me recomiendan por $300?')">¿Qué celular me recomiendan
+                        por
+                        $300?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Hacen envíos gratis en compras grandes?')">¿Hacen envíos gratis en
+                        compras
+                        grandes?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Tienen servicio técnico para computadoras?')">¿Tienen servicio técnico
+                        para computadoras?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Cuándo es su próxima venta de tecnología?')">¿Cuándo es su próxima
+                        venta
+                        de tecnología?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Qué opciones de pago aceptan?')">¿Qué opciones de pago
+                        aceptan?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Tienen auriculares inalámbricos?')">¿Tienen auriculares
+                        inalámbricos?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Cómo funciona la garantía de fábrica?')">¿Cómo funciona la garantía de
+                        fábrica?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Venden tarjetas de memoria para cámaras?')">¿Venden tarjetas de
+                        memoria
+                        para cámaras?</button>
+                </div>
             </div>
 
             <!-- Loading indicator -->
