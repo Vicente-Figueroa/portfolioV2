@@ -1,0 +1,62 @@
+<!-- Page content-->
+<section class="py-5">
+    <div class="container px-5">
+        <!-- Chatbot form-->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-5 tittle">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-chat-dots"></i>
+                </div>
+                <h1 class="fw-bolder">Chatbot E-commerce</h1>
+                <p class="lead fw-normal text-muted mb-0">¿En qué puedo ayudarte hoy?</p>
+            </div>
+
+            <!-- Chatbot description -->
+            <div class="alert alert-info mb-4" role="alert">
+                <h4 class="alert-heading">Bienvenido a nuestro Chatbot de E-commerce</h4>
+                <p>Este es un bot inteligente diseñado para capturar la intención de tus preguntas en el contexto de una tienda de tecnología online. Puedes hacerle preguntas como si estuvieras en una tienda real de productos tecnológicos.</p>
+                <hr>
+                <p class="mb-0">Ejemplos de preguntas que puedes hacer:</p>
+                <ul>
+                    <li>¿Tienes el último modelo de iPhone?</li>
+                    <li>¿Cuál es el precio de los AirPods Pro?</li>
+                    <li>¿Qué laptops gaming tienen en stock?</li>
+                    <li>¿Ofrecen garantía extendida para televisores?</li>
+                </ul>
+            </div>
+
+            <!-- Conversation area -->
+            <div class="conversation-area mb-4" style="height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: #f8f9fa;">
+                <div *ngFor="let message of conversation" class="mb-3">
+                    <div *ngIf="message.startsWith('Usuario:')" class="text-end">
+                        <span class="bg-primary text-white py-2 px-3 rounded-pill d-inline-block">
+                            {{ message }}
+                        </span>
+                    </div>
+                    <div *ngIf="message.startsWith('Chatbot:')" class="chatbot-response">
+                        <div class="bg-light border rounded p-3">
+                            <strong class="d-block mb-2">Respuesta del Chatbot:</strong>
+                            <pre style="white-space: pre-wrap; font-family: inherit; margin-bottom: 0;">{{ message.substring(8) }}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input area -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" [(ngModel)]="userInput" placeholder="Escribe tu mensaje aquí..."
+                    (keyup.enter)="sendMessage()" [disabled]="loading">
+                <button class="btn btn-primary" type="button" (click)="sendMessage()" [disabled]="loading">
+                    <i class="bi bi-send"></i> Enviar
+                </button>
+            </div>
+
+            <!-- Loading indicator -->
+            <div *ngIf="loading" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
