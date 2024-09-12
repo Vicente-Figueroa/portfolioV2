@@ -21,20 +21,22 @@ export class CardProjectComponent {
     this.showMore = !this.showMore;
   }
 
-// Función para abrir el lightbox con imagen y descripción dinámicas
-openLightbox(imageSrc: string, description: string): void {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
-  const lightboxDescription = document.getElementById('lightbox-description') as HTMLParagraphElement;
+  // Función para abrir el lightbox con imagen y descripción dinámicas
+  openLightbox(imageSrc: string, description: string, title: string): void {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxTitle = document.getElementById('lightbox-title') as HTMLParagraphElement;
+    const lightboxDescription = document.getElementById('lightbox-description') as HTMLParagraphElement;
 
-  if (lightbox && lightboxImg && lightboxDescription) {
-    lightboxImg.src = imageSrc;
-    lightboxDescription.textContent = description;
-    lightbox.style.display = 'block';
-  } else {
-    console.error('Lightbox elements not found.');
+    if (lightbox && lightboxImg && lightboxDescription) {
+      lightboxImg.src = imageSrc;
+      lightboxTitle.textContent = title;
+      lightboxDescription.textContent = description;
+      lightbox.style.display = 'block';
+    } else {
+      console.error('Lightbox elements not found.');
+    }
   }
-}
   closeLightbox(): void {
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {

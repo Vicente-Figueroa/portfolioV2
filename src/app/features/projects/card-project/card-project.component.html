@@ -13,7 +13,7 @@
             </div>
             <div class="position-relative">
                 <!-- Imagen que abre el lightbox con la imagen y la descripción -->
-                <img [src]="image" (click)="openLightbox(image, description)" alt="{{name}}" />
+                <img [src]="image" (click)="openLightbox(image, description, name)" alt="{{name}}" />
 
                 <!-- Añadimos el ícono de lupa en la versión grande -->
                 <div class="click-icon">
@@ -32,7 +32,7 @@
                 <div class="bg-light p-4 rounded-4">
                     <div class="position-relative">
                         <!-- Imagen que abre el lightbox con la imagen y la descripción -->
-                        <img [src]="image" class="img-fluid" (click)="openLightbox(image, description)"
+                        <img [src]="image" class="img-fluid" (click)="openLightbox(image, description, name)"
                             alt="{{name}}" />
 
                         <div class="click-icon">
@@ -66,11 +66,12 @@
 <div id="lightbox" class="lightbox" (click)="closeLightbox()">
     <span class="close" (click)="closeLightbox()">&times;</span>
     <div class="lightbox-content-wrapper">
-      <img id="lightbox-img" class="lightbox-content" src="" alt="Descripción de la imagen">
-      <div class="lightbox-caption">
-        <p id="lightbox-description">
-          <!-- Aquí se cargará la descripción dinámica -->
-        </p>
-      </div>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Descripción de la imagen">
+        <div class="lightbox-caption">
+            <h4 id="lightbox-title"></h4>
+            <p id="lightbox-description">
+                <!-- Aquí se cargará la descripción dinámica -->
+            </p>
+        </div>
     </div>
-  </div>
+</div>
