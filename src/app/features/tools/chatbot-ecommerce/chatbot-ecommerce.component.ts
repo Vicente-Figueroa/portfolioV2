@@ -14,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 
 
 export class ChatbotEcommerceComponent {
+
+  private expandedElements: { [key: string]: boolean } = {};
+
   constructor(private http: HttpClient, private ngZone: NgZone) { }
   private apiUrl = `${environment.apiUrl}/ecommerce_agent/intent_product/`;
   public conversation: string[] = [];
@@ -35,6 +38,14 @@ export class ChatbotEcommerceComponent {
 
   trackByFn(index: number, item: string): number {
     return index;
+  }
+
+  toggleExpansion(elementId: string): void {
+    this.expandedElements[elementId] = !this.expandedElements[elementId];
+  }
+
+  isExpanded(elementId: string): boolean {
+    return this.expandedElements[elementId] || false;
   }
 
 
@@ -124,6 +135,7 @@ export class ChatbotEcommerceComponent {
       message += 'No se encontraron productos que coincidan con tu búsqueda.\n';
       console.log('No se encontraron productos que coincidan con la búsqueda.');
     }
+
 
 
 
