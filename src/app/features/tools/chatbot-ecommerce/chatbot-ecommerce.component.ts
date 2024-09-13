@@ -94,51 +94,34 @@ export class ChatbotEcommerceComponent {
 
   private processResponse(response: any) {
     let message = '';
-    let intents: Array<[string, number]> = [];
-
+  
     // Función auxiliar para formatear la probabilidad
     const formatProbability = (prob: number) => (prob * 100).toFixed(2);
-
-    // Determinar si la respuesta contiene una única intención o múltiples
-    if (Array.isArray(response.intenciones) && Array.isArray(response.intenciones[0])) {
-      // Múltiples intenciones
-      intents = response.intenciones;
-    } else if (Array.isArray(response.intenciones) && response.intenciones.length === 2) {
-      // Una sola intención
-      intents = [response.intenciones as [string, number]];
-    } else {
-      console.error('Formato de intención no reconocido');
-      return;
+  
+    // Procesar intención inicial
+    if (response.intencion_inicial && response.intencion_inicial.length > 0) {
+      const [intentName, probability] = response.intencion_inicial[0];
+      message += `Intención inicial: ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
     }
-
-    // Ordenar intenciones por probabilidad (de mayor a menor)
-    intents.sort((a, b) => b[1] - a[1]);
-
-    // Mostrar todas las intenciones probables
-    message += "Intenciones detectadas:\n";
-    intents.forEach(([intentName, probability]) => {
-      message += `- ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
-    });
-
-    // Procesar la intención principal (la primera después de ordenar)
-    const [mainIntentName, mainIntentProbability] = intents[0];
-    console.log(`Intención principal detectada: ${mainIntentName} (probabilidad: ${formatProbability(mainIntentProbability)}%)`);
-
-
+  
+    // Procesar intenciones secundarias
+    if (response.intencion_secundaria && response.intencion_secundaria.length > 0) {
+      message += "Intenciones secundarias:\n";
+      response.intencion_secundaria.forEach(([intentName, probability]: [string, number]) => {
+        message += `- ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
+      });
+    }
+  
+    // Procesar productos
     if (response.productos && response.productos.length > 0) {
       message += 'Productos encontrados:\n';
       response.productos.forEach((producto: [string, number]) => {
         message += `- ${producto[0]} (relevancia: ${producto[1]})\n`;
-        console.log(`Producto encontrado: ${producto[0]} (relevancia: ${producto[1]})`);
       });
     } else {
       message += 'No se encontraron productos que coincidan con tu búsqueda.\n';
-      console.log('No se encontraron productos que coincidan con la búsqueda.');
     }
-
-
-
-
+  
     this.addMessage(`Chatbot: ${message}`);
   }
 }
