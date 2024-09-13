@@ -98,10 +98,17 @@ export class ChatbotEcommerceComponent {
     // Función auxiliar para formatear la probabilidad
     const formatProbability = (prob: number) => (prob * 100).toFixed(2);
   
-    // Procesar intención inicial
+    // Procesar intención(es) inicial(es)
     if (response.intencion_inicial && response.intencion_inicial.length > 0) {
-      const [intentName, probability] = response.intencion_inicial[0];
-      message += `Intención inicial: ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
+      if (response.intencion_inicial.length === 1) {
+        const [intentName, probability] = response.intencion_inicial[0];
+        message += `Intención inicial: ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
+      } else {
+        message += "Intenciones iniciales:\n";
+        response.intencion_inicial.forEach(([intentName, probability]: [string, number]) => {
+          message += `- ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
+        });
+      }
     }
   
     // Procesar intenciones secundarias
@@ -119,7 +126,7 @@ export class ChatbotEcommerceComponent {
         message += `- ${producto[0]} (relevancia: ${producto[1]})\n`;
       });
     } else {
-      message += 'No se encontraron productos que coincidan con tu búsqueda.\n';
+      message += 'No se encontraron productos específicos en tu búsqueda.\n';
     }
   
     this.addMessage(`Chatbot: ${message}`);

@@ -24,9 +24,18 @@
 
                 <div class="collapse" id="chatbotDescription">
                     <div class="card card-body mt-2">
-                        <h4 class="card-title">Bienvenido a nuestro Proto-Chatbot de E-commerce</h4>
-                        <p class="card-text">Este prototipo reconoce la intención de tus preguntas y los productos
-                            mencionados, en el contexto de una tienda de tecnología online.</p>
+                        <h4 class="card-title">Nuestro Chatbot de E-commerce: Combinando Machine Learning e IA</h4>
+                        <p class="card-text">
+                            Este chatbot utiliza técnicas de machine learning para entender las intenciones del usuario y reconocer productos en el contexto de una tienda de tecnología online. Algunas características clave:
+                        </p>
+                        <ul>
+                            <li>Funciona de manera independiente, sin usar ChatGPT</li>
+                            <li>Identifica intenciones y entidades en las consultas del usuario</li>
+                            <li>Puede manejar bases de datos, scripts y peticiones https en base a acciones concretas</li>
+                        </ul>
+                        <p class="card-text">
+                            En el futuro, planeamos integrar este sistema con ChatGPT para mejorar sus capacidades de respuesta y comprensión. Este prototipo es un paso hacia chatbots más inteligentes y eficientes en el comercio electrónico.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -66,14 +75,15 @@
             </div>
             <p class="mb-2">Sugerencias de preguntas:</p>
             <div class="d-flex flex-wrap gap-2 mb-2">
+                <button class="btn btn-outline-primary btn-sm" (click)="sendSuggestion('¿Que productos tienen?')">¿Que
+                    productos tienen?</button>
                 <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Cuándo llega el nuevo modelo de iPhone?')">¿Cuándo llega el nuevo modelo
-                    de iPhone?</button>
+                    (click)="sendSuggestion('¿Cómo puedo iniciar sesión en mi cuenta?')">¿Cómo puedo iniciar sesión
+                    en mi cuenta?</button>
                 <button class="btn btn-outline-primary btn-sm"
-                    (click)="sendSuggestion('¿Tienen laptops gaming en oferta?')">¿Tienen laptops gaming en
-                    oferta?</button>
+                    (click)="sendSuggestion('Quiero registrarme, ¿qué datos necesito?')">Quiero registrarme, ¿qué
+                    datos necesito?</button>
             </div>
-
             <button class="btn btn-link btn-sm mb-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#moreSuggestions" [attr.aria-expanded]="isExpanded('moreSuggestions')"
                 aria-controls="moreSuggestions" (click)="toggleExpansion('moreSuggestions')">
@@ -84,51 +94,38 @@
 
             <div class="collapse" id="moreSuggestions">
                 <div class="d-flex flex-wrap gap-2">
+
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Cómo puedo rastrear mi pedido?')">¿Cómo puedo rastrear mi
-                        pedido?</button>
+                        (click)="sendSuggestion('¿Tienen laptops en oferta?')">¿Tienen laptops en oferta?</button>
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Cuál es la mejor tablet para estudiantes?')">¿Cuál es la mejor tablet
-                        para
-                        estudiantes?</button>
+                        (click)="sendSuggestion('¿Cómo puedo finalizar mi compra?')">¿Cómo puedo finalizar mi
+                        compra?</button>
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Ofrecen garantía extendida para TVs?')">¿Ofrecen garantía extendida
-                        para
-                        TVs?</button>
+                        (click)="sendSuggestion('Busco un smartphone con buena cámara')">Busco un smartphone con buena
+                        cámara</button>
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Tienen el PlayStation 5 en stock?')">¿Tienen el PlayStation 5 en
-                        stock?</button>
+                        (click)="sendSuggestion('¿Cuáles son los métodos de pago disponibles?')">¿Cuáles son los métodos
+                        de pago disponibles?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Cómo puedo ver el estado de mi pedido?')">¿Cómo puedo ver el estado de
+                        mi pedido?</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('Quiero cambiar la contraseña de mi cuenta')">Quiero cambiar la
+                        contraseña de mi cuenta</button>
+                    <button class="btn btn-outline-primary btn-sm"
+                        (click)="sendSuggestion('¿Tienen envío gratis?')">¿Tienen envío gratis?</button>
                     <button class="btn btn-outline-primary btn-sm"
                         (click)="sendSuggestion('¿Cuál es su política de devoluciones?')">¿Cuál es su política de
                         devoluciones?</button>
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Qué celular me recomiendan por $300?')">¿Qué celular me recomiendan
-                        por
-                        $300?</button>
+                        (click)="sendSuggestion('¿Puedo cancelar un pedido ya realizado?')">¿Puedo cancelar un pedido ya
+                        realizado?</button>
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Hacen envíos gratis en compras grandes?')">¿Hacen envíos gratis en
-                        compras
-                        grandes?</button>
+                        (click)="sendSuggestion('¿Tienen algún programa de lealtad o puntos?')">¿Tienen algún programa
+                        de lealtad o puntos?</button>
                     <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Tienen servicio técnico para computadoras?')">¿Tienen servicio técnico
-                        para computadoras?</button>
-                    <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Cuándo es su próxima venta de tecnología?')">¿Cuándo es su próxima
-                        venta
-                        de tecnología?</button>
-                    <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Qué opciones de pago aceptan?')">¿Qué opciones de pago
-                        aceptan?</button>
-                    <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Tienen auriculares inalámbricos?')">¿Tienen auriculares
-                        inalámbricos?</button>
-                    <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Cómo funciona la garantía de fábrica?')">¿Cómo funciona la garantía de
-                        fábrica?</button>
-                    <button class="btn btn-outline-primary btn-sm"
-                        (click)="sendSuggestion('¿Venden tarjetas de memoria para cámaras?')">¿Venden tarjetas de
-                        memoria
-                        para cámaras?</button>
+                        (click)="sendSuggestion('¿Cómo puedo comparar diferentes productos?')">¿Cómo puedo comparar
+                        diferentes productos?</button>
                 </div>
             </div>
 
