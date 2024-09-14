@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, ViewChild, ElementRef, NgZone, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -9,23 +9,40 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './chatbot-ecommerce.component.html',
-  styleUrl: './chatbot-ecommerce.component.css'
+  styleUrls: ['./chatbot-ecommerce.component.css']  // Corrección de typo
 })
-
-
-export class ChatbotEcommerceComponent {
+export class ChatbotEcommerceComponent implements OnInit {
 
   private expandedElements: { [key: string]: boolean } = {};
-
-  constructor(private http: HttpClient, private ngZone: NgZone) { }
   private apiUrl = `${environment.apiUrl}/ecommerce_agent/predict-intent/`;
   public conversation: string[] = [];
   public userInput: string = '';
   public loading: boolean = false;
-
+  public messageCount: number = 0;  // Contador de mensajes del usuario
 
   @ViewChild('conversationContainer') private conversationContainer!: ElementRef;
 
+  constructor(private http: HttpClient, private ngZone: NgZone) { }
+
+  ngOnInit() {
+    // Cargar la conversación y el contador desde el almacenamiento local al iniciar
+    const savedConversation = localStorage.getItem('conversation');
+    const savedMessageCount = localStorage.getItem('messageCount');
+
+    if (savedConversation) {
+      this.conversation = JSON.parse(savedConversation);
+    }
+
+    if (savedMessageCount) {
+      this.messageCount = parseInt(savedMessageCount, 10);
+    }
+  }
+
+  // Método para guardar la conversación y el contador en localStorage
+  private saveToLocalStorage(): void {
+    localStorage.setItem('conversation', JSON.stringify(this.conversation));
+    localStorage.setItem('messageCount', this.messageCount.toString());
+  }
 
   private scrollToBottom(): void {
     try {
@@ -48,14 +65,21 @@ export class ChatbotEcommerceComponent {
     return this.expandedElements[elementId] || false;
   }
 
-
   sendSuggestion(suggestion: string) {
     this.userInput = suggestion;
     this.sendMessage();
   }
+
   // Modifica el método existente que añade mensajes a la conversación
-  addMessage(message: string): void {
+  addMessage(message: string, fromUser: boolean = false): void {
     this.conversation.push(message);
+
+    // Solo incrementar el contador si el mensaje es del usuario
+    if (fromUser) {
+      this.messageCount++;  // Incrementar el contador de mensajes del usuario
+      this.saveToLocalStorage();  // Guardar la conversación y el contador en localStorage
+    }
+
     this.ngZone.runOutsideAngular(() => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -66,21 +90,25 @@ export class ChatbotEcommerceComponent {
       });
     });
   }
+
   sendMessage() {
     if (this.userInput.trim() === '') {
       return;
     }
 
     this.loading = true;
-    this.addMessage(`Usuario: ${this.userInput}`);
+
+    // Añadir el mensaje del usuario y marcarlo como "fromUser"
+    this.addMessage(`Usuario: ${this.userInput}`, true);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
+    // Enviar el número de mensajes del usuario como "step" en la solicitud
     const body = {
       text: this.userInput,
-      step: 1  // Siempre 1 por ahora
+      step: this.messageCount  // Usar el contador de mensajes del usuario como "step"
     };
 
     this.http.post(this.apiUrl, body, { headers: headers })
@@ -94,6 +122,7 @@ export class ChatbotEcommerceComponent {
         this.loading = false;
       });
   }
+
   private processResponse(response: any) {
     let message = '';
 
@@ -120,6 +149,14 @@ export class ChatbotEcommerceComponent {
       }
     }
 
+    // Añadir el mensaje del chatbot
     this.addMessage(`Chatbot: ${message}`);
+  }
+
+  clearLocalStorage(): void {
+    localStorage.removeItem('conversation');
+    localStorage.removeItem('messageCount');
+    this.conversation = [];
+    this.messageCount = 0;
   }
 }

@@ -26,15 +26,20 @@
                     <div class="card card-body mt-2">
                         <h4 class="card-title">Proto-Chatbot de E-commerce: Machine Learning e IA</h4>
                         <p class="card-text">
-                            Este chatbot utiliza técnicas de machine learning para entender las intenciones del usuario y reconocer productos en el contexto de una tienda de tecnología online. Algunas características clave:
+                            Este chatbot utiliza técnicas de machine learning para entender las intenciones del usuario
+                            y reconocer productos en el contexto de una tienda de tecnología online. Algunas
+                            características clave:
                         </p>
                         <ul>
                             <li>Funciona de manera independiente, sin usar ChatGPT</li>
                             <li>Identifica intenciones y entidades en las consultas del usuario</li>
-                            <li>Puede manejar bases de datos, scripts y peticiones https en base a acciones concretas</li>
+                            <li>Puede manejar bases de datos, scripts y peticiones https en base a acciones concretas
+                            </li>
                         </ul>
                         <p class="card-text">
-                            En el futuro, planeamos integrar este sistema con ChatGPT para mejorar sus capacidades de respuesta y comprensión. Este prototipo es un paso hacia chatbots más inteligentes y eficientes en el comercio electrónico.
+                            En el futuro, planeamos integrar este sistema con ChatGPT para mejorar sus capacidades de
+                            respuesta y comprensión. Este prototipo es un paso hacia chatbots más inteligentes y
+                            eficientes en el comercio electrónico.
                         </p>
                     </div>
                 </div>
@@ -65,6 +70,9 @@
                     (keyup.enter)="sendMessage()" [disabled]="loading">
                 <button class="btn btn-primary" type="button" (click)="sendMessage()" [disabled]="loading">
                     <i class="bi bi-send"></i> Enviar
+                </button>
+                <button class="btn btn-danger" type="button" (click)="clearLocalStorage()">
+                    <i class="bi bi-trash"></i> Borrar conversación
                 </button>
             </div>
             <!-- Loading indicator -->
