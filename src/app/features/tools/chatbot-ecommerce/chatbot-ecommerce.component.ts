@@ -74,11 +74,12 @@ export class ChatbotEcommerceComponent implements OnInit {
   addMessage(message: string, fromUser: boolean = false): void {
     this.conversation.push(message);
 
-    // Solo incrementar el contador si el mensaje es del usuario
+    // Incrementar el contador solo si el mensaje es del usuario
     if (fromUser) {
       this.messageCount++;  // Incrementar el contador de mensajes del usuario
-      this.saveToLocalStorage();  // Guardar la conversación y el contador en localStorage
     }
+
+    this.saveToLocalStorage();  // Guardar la conversación y el contador en localStorage
 
     this.ngZone.runOutsideAngular(() => {
       requestAnimationFrame(() => {
@@ -90,7 +91,6 @@ export class ChatbotEcommerceComponent implements OnInit {
       });
     });
   }
-
   sendMessage() {
     if (this.userInput.trim() === '') {
       return;
