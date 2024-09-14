@@ -18,7 +18,7 @@ export class ChatbotEcommerceComponent {
   private expandedElements: { [key: string]: boolean } = {};
 
   constructor(private http: HttpClient, private ngZone: NgZone) { }
-  private apiUrl = `${environment.apiUrl}/ecommerce_agent/intent_product/`;
+  private apiUrl = `${environment.apiUrl}/ecommerce_agent/predict-intent/`;
   public conversation: string[] = [];
   public userInput: string = '';
   public loading: boolean = false;
@@ -78,7 +78,10 @@ export class ChatbotEcommerceComponent {
       'Content-Type': 'application/json',
     });
 
-    const body = { message: this.userInput };
+    const body = {
+      text: this.userInput,
+      step: 1  // Siempre 1 por ahora
+    };
 
     this.http.post(this.apiUrl, body, { headers: headers })
       .subscribe((response: any) => {
@@ -91,44 +94,32 @@ export class ChatbotEcommerceComponent {
         this.loading = false;
       });
   }
-
   private processResponse(response: any) {
     let message = '';
-  
-    // Función auxiliar para formatear la probabilidad
-    const formatProbability = (prob: number) => (prob * 100).toFixed(2);
-  
-    // Procesar intención(es) inicial(es)
-    if (response.intencion_inicial && response.intencion_inicial.length > 0) {
-      if (response.intencion_inicial.length === 1) {
-        const [intentName, probability] = response.intencion_inicial[0];
-        message += `Intención inicial: ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
-      } else {
-        message += "Intenciones iniciales:\n";
-        response.intencion_inicial.forEach(([intentName, probability]: [string, number]) => {
-          message += `- ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
-        });
+
+    // Añadir el texto de entrada del usuario
+    message += `Input: ${response.input}\n`;
+
+    // Añadir el paso actual
+    message += `Paso: ${response.step}\n\n`;
+
+    // Procesar las intenciones detectadas
+    if (response.intent && response.intent.options) {
+      message += "Intenciones detectadas:\n";
+      for (const [intent, probability] of Object.entries(response.intent.options)) {
+        message += `- ${intent}: ${(probability as number * 100).toFixed(2)}%\n`;
+      }
+      message += '\n';
+    }
+
+    // Procesar las posibles acciones siguientes
+    if (response.next_action && response.next_action.options) {
+      message += "Posibles acciones siguientes:\n";
+      for (const [action, probability] of Object.entries(response.next_action.options)) {
+        message += `- ${action}: ${(probability as number * 100).toFixed(2)}%\n`;
       }
     }
-  
-    // Procesar intenciones secundarias
-    if (response.intencion_secundaria && response.intencion_secundaria.length > 0) {
-      message += "Intenciones secundarias:\n";
-      response.intencion_secundaria.forEach(([intentName, probability]: [string, number]) => {
-        message += `- ${intentName} (probabilidad: ${formatProbability(probability)}%)\n`;
-      });
-    }
-  
-    // Procesar productos
-    if (response.productos && response.productos.length > 0) {
-      message += 'Productos encontrados:\n';
-      response.productos.forEach((producto: [string, number]) => {
-        message += `- ${producto[0]} (relevancia: ${producto[1]})\n`;
-      });
-    } else {
-      message += 'No se encontraron productos específicos en tu búsqueda.\n';
-    }
-  
+
     this.addMessage(`Chatbot: ${message}`);
   }
 }
