@@ -224,9 +224,7 @@ export class ChatbotEcommerceComponent implements OnInit {
   clearLocalStorage(): void {
     localStorage.removeItem('conversation');
     localStorage.removeItem('messageCount');
-    localStorage.removeItem('debugMode'); // Limpiar el modo debug
     this.conversation = [];
     this.messageCount = 0;
-    this.debugMode = true; // Resetear el modo debug a true
   }
 }

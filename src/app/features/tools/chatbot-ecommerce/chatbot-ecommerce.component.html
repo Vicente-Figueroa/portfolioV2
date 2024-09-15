@@ -56,9 +56,11 @@
             <div *ngIf="serverStatus === 'offline'" class="alert alert-warning text-center" role="alert">
                 El servidor no está disponible en este momento. Intentando reconectar...
             </div>
+
             <!-- Conversation area -->
             <div #conversationContainer class="conversation-area mb-4"
                 style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; padding-bottom: 20px; background-color: #f8f9fa;">
+
                 <div *ngFor="let message of conversation" class="mb-3">
                     <!-- Mensaje del usuario -->
                     <div *ngIf="message.startsWith('Usuario:')" class="text-end">
@@ -72,8 +74,8 @@
                         <div class="bg-light border rounded p-3">
                             <strong class="d-block mb-2">Metadata del Chatbot:</strong>
                             <pre style="white-space: pre-wrap; font-family: inherit; margin-bottom: 0;">
-                    {{ message.substring(19) }} <!-- Remover "Chatbot (Metadata):" -->
-                </pre>
+                {{ message.substring(19) }} <!-- Remover "Chatbot (Metadata):" -->
+            </pre>
                         </div>
                     </div>
 
@@ -82,9 +84,16 @@
                         <div class="bg-light border rounded p-3">
                             <strong class="d-block mb-2">Respuesta del Chatbot:</strong>
                             <pre style="white-space: pre-wrap; font-family: inherit; margin-bottom: 0;">
-                    {{ message.substring(8) }} <!-- Remover "Chatbot:" -->
-                </pre>
+                {{ message.substring(8) }} <!-- Remover "Chatbot:" -->
+            </pre>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Loading indicator inside the conversation area -->
+                <div *ngIf="loading || serverStatus === 'offline'" class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
                     </div>
                 </div>
             </div>
@@ -101,12 +110,7 @@
                     <i class="bi bi-trash"></i> Borrar conversación
                 </button>
             </div>
-            <!-- Loading indicator -->
-            <div *ngIf="loading || serverStatus === 'offline'" class="text-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Cargando...</span>
-                </div>
-            </div>
+
             <p class="mb-2">Sugerencias de preguntas:</p>
             <div class="d-flex flex-wrap gap-2 mb-2">
                 <button class="btn btn-outline-primary btn-sm" (click)="sendSuggestion('¿Que productos tienen?')">¿Que
