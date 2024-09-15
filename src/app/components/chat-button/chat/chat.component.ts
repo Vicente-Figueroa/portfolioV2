@@ -97,7 +97,7 @@ export class ChatComponent implements OnInit {
     this.saveConversation();
 
     // Mostrar el popup después de 2 mensajes y si el correo no fue enviado
-    if (this.messageCount == 2 && !this.emailSent && !this.showPopup) {
+    if (this.messageCount > 2 && !this.emailSent && !this.showPopup) {
       this.showPopup = true;
       this.savePopupState(); // Guardar el estado del popup en localStorage
     }
