@@ -19,17 +19,22 @@ export class ChatbotEcommerceComponent implements OnInit {
   public userInput: string = '';
   public loading: boolean = false;
   public messageCount: number = 0;
-  public debugMode: boolean = false; // Inicialmente desactivado
+  public debugMode: boolean = true; // Inicialmente en false, para evitar conflictos
 
   @ViewChild('conversationContainer') private conversationContainer!: ElementRef;
 
   constructor(private http: HttpClient, private ngZone: NgZone) { }
 
   ngOnInit() {
+    // Cargar el modo debug guardado en localStorage, si existe
+    const savedDebugMode = localStorage.getItem('debugMode');
+
+    // Si existe en localStorage, usar ese valor, de lo contrario, inicializar en false
+    this.debugMode = savedDebugMode === 'true';
+
     // Cargar la conversación y el contador desde el almacenamiento local al iniciar
     const savedConversation = localStorage.getItem('conversation');
     const savedMessageCount = localStorage.getItem('messageCount');
-    const savedDebugMode = localStorage.getItem('debugMode'); // Cargar el modo debug desde localStorage
 
     if (savedConversation) {
       this.conversation = JSON.parse(savedConversation);
@@ -38,17 +43,12 @@ export class ChatbotEcommerceComponent implements OnInit {
     if (savedMessageCount) {
       this.messageCount = parseInt(savedMessageCount, 10);
     }
-
-    // Aplicar el modo debug guardado en localStorage
-    if (savedDebugMode !== null) {
-      this.debugMode = savedDebugMode === 'true'; // Convertir a booleano
-    }
   }
 
-  // Método para alternar el modo debug
-  toggleDebugMode(): void {
-    this.debugMode = !this.debugMode; // Cambiar el estado de debugMode
-    localStorage.setItem('debugMode', this.debugMode.toString()); // Guardar el estado en localStorage
+  // Método para manejar el cambio de debugMode y guardarlo en localStorage
+  onDebugModeChange(newValue: boolean): void {
+    this.debugMode = newValue;
+    localStorage.setItem('debugMode', this.debugMode.toString());
   }
 
   // Método para guardar la conversación y el contador en localStorage
@@ -187,6 +187,6 @@ export class ChatbotEcommerceComponent implements OnInit {
     localStorage.removeItem('debugMode'); // Limpiar el modo debug
     this.conversation = [];
     this.messageCount = 0;
-    this.debugMode = false; // Resetear el modo debug
+    this.debugMode = true; // Resetear el modo debug a true
   }
 }

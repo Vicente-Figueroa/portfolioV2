@@ -47,11 +47,9 @@
 
             <!-- Switch para activar/desactivar el modo debug -->
             <div class="form-check form-switch mb-4">
-                <input class="form-check-input" type="checkbox" id="debugModeSwitch" [(ngModel)]="debugMode"
-                    (change)="toggleDebugMode()">
+                <input class="form-check-input" type="checkbox" id="debugModeSwitch" [(ngModel)]="debugMode" (ngModelChange)="onDebugModeChange($event)">
                 <label class="form-check-label" for="debugModeSwitch">Modo Debug</label>
-            </div>
-
+              </div>
             <!-- Conversation area -->
             <div #conversationContainer class="conversation-area mb-4"
                 style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; padding-bottom: 20px; background-color: #f8f9fa;">
