@@ -7,20 +7,42 @@
     height: 40px;
     margin-right: 8px;
 }
+
 .xl-none {
     display: none;
 }
+
 @media (max-width: 576px) {
     .sm-none {
         display: none;
     }
+
     .icon {
         width: 30px;
         height: 30px;
         margin-right: 8px;
     }
+
     .xl-none {
-        display:inline;
+        display: inline;
     }
-    
+
+}
+
+
+
+/* Ajustes para pantallas extra grandes */
+@media (min-width: 800px) {
+    .navbar-nav .nav-item {
+        margin-right: 20px;
+    }
+
+
+    /* Alinear el switch del modo debug en pantallas grandes */
+    .form-check.form-switch {
+        margin-right: 20px;
+    }
+    .form-check{
+        font-size: 0.8em;
+    }
 }

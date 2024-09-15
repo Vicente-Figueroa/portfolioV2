@@ -15,10 +15,32 @@
         <li class="nav-item"><a class="nav-link" href="resume">Experiencia</a></li>
         <li class="nav-item"><a class="nav-link" href="projects">Proyectos</a></li>
         <li class="nav-item"><a class="nav-link" href="contact">Contacto</a></li>
-        <li class="nav-item"><a class="nav-link" href="/ecommerce">ChatbotEcommerce</a></li>
-        <!-- Nuevo ítem para eliminar el token -->
-        <li class="nav-item"><a class="nav-link" href="#" (click)="resetOnboarding()">Onboarding</a></li>
+      </ul>
+
+      <!-- Switch para activar el modo debug -->
+      <!-- Modo desarrollador -->
+      <div class="d-flex align-items-center">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="navdebugModeSwitch" [(ngModel)]="debugMode"
+            (ngModelChange)="toggleNavDebugMode($event)">
+          <label class="form-check-label" for="navdebugModeSwitch">Modo desarrollador</label>
+        </div>
+      </div>
+
+      <!-- Opciones de depuración que se muestran solo si el modo debug está activado -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder" *ngIf="debugMode">
+        <li class="nav-item">
+          <a class="nav-link" href="/ecommerce">Chatbot Ecommerce</a>
+        </li>
+        <li class="nav-item" (click)="resetOnboarding()">
+          <a class="nav-link">Resetear Onboarding</a>
+        </li>
+        <li class="nav-item">
+          server-status: <app-server-status></app-server-status>
+        </li>
       </ul>
     </div>
+
+
   </div>
 </nav>

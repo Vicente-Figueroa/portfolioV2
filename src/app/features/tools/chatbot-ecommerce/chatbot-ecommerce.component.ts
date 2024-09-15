@@ -3,11 +3,12 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ServerStatusComponent } from '../../../components/server-status/server-status.component';
 
 @Component({
   selector: 'app-chatbot-ecommerce',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, ServerStatusComponent],
   templateUrl: './chatbot-ecommerce.component.html',
   styleUrls: ['./chatbot-ecommerce.component.css']
 })
