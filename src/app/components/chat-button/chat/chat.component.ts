@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit {
 
   private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
 
-  constructor(private http: HttpClient, private renderer: Renderer2) {}
+  constructor(private http: HttpClient, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.loadConversation(); // Cargar cualquier conversación guardada
@@ -104,12 +104,16 @@ export class ChatComponent implements OnInit {
     if (!this.question?.trim()) {
       return; // No hacer nada si la pregunta está vacía o es solo espacios en blanco
     }
+    const savedConversation = localStorage.getItem('chatConversation');
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
-    const body = { question: this.question.trim() }; // Eliminamos espacios en blanco innecesarios
+    const body = {
+      question: this.question.trim(),
+      history_chat: savedConversation
+    }; // Eliminamos espacios en blanco innecesarios
 
     this.http.post(`${this.apiUrl}/api/chat/`, body, { headers: headers }) // Usamos la URL del entorno
       .subscribe({
