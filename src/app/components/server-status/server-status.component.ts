@@ -1,18 +1,21 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { interval, Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-server-status',
   standalone: true,
   imports: [CommonModule],
   template: `
-  <div [ngClass]="{
-    'status-green': status === 'online',
-    'status-yellow': status === 'slow',
-    'status-red': status === 'offline'
-  }" class="status-indicator"></div>
+<div>
+  <span>server-status: </span>
+  <span [ngClass]="{'online': serverStatus === 'online', 'offline': serverStatus === 'offline'}">
+    {{ serverStatus }}
+  </span>
+</div>
 `,
   styles: [`
   .status-indicator {
@@ -32,33 +35,40 @@ import { CommonModule } from '@angular/common';
   }
 `]
 })
-export class ServerStatusComponent {
-  private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
-
-  public status: 'online' | 'slow' | 'offline' = 'offline';  // Estado del servidor
+export class ServerStatusComponent implements OnInit, OnDestroy {
+  public serverStatus: string = 'asking...'; // Estado inicial del servidor
+  private pingInterval: Subscription | undefined; // Para almacenar la suscripción al intervalo
+  private apiUrl: string = environment.apiUrl + '/api/ping/' // URL del servidor
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.checkServerStatus();  // Verificar el estado del servidor al iniciar
+    // Iniciar el ping cada 5 segundos
+    this.pingInterval = interval(5000).subscribe(() => {
+      this.checkServerStatus();
+    });
   }
 
+  // Método para hacer ping al servidor
   checkServerStatus() {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.http.get(this.apiUrl, { responseType: 'text' }) // Hacemos una solicitud GET al servidor
+      .pipe(
+        catchError(() => {
+          // Si hay un error, asumimos que el servidor está offline
+          this.serverStatus = 'offline';
+          return [];
+        })
+      )
+      .subscribe(() => {
+        // Si la solicitud es exitosa, el servidor está online
+        this.serverStatus = 'online';
+      });
+  }
 
-    // Hacer una solicitud "ping" al servidor
-    this.http.get(`${this.apiUrl}/api/ping/`, { headers, observe: 'response' })
-      .subscribe(
-        response => {
-          if (response.status === 200) {
-            this.status = 'online';  // Servidor disponible
-          } else {
-            this.status = 'slow';  // Respuesta lenta o diferente
-          }
-        },
-        error => {
-          this.status = 'offline';  // Error de conexión
-        }
-      );
+  ngOnDestroy() {
+    // Limpiar el intervalo cuando el componente se destruya
+    if (this.pingInterval) {
+      this.pingInterval.unsubscribe();
+    }
   }
 }
