@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ChatButtonComponent } from './components/chat-button/chat-button.component';
 import { OnboardingComponent } from './features/onboarding/onboarding.component';
+import { environment } from '../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +15,33 @@ import { OnboardingComponent } from './features/onboarding/onboarding.component'
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Vicente';
+  private apiUrl: string = environment.apiUrl + "/api/ping/"
+  public serverStatus: string = 'unknown'; // Estado inicial del servidor
+
+  constructor(private http: HttpClient) {}
+
+
+  ngOnInit(): void {
+        // Hacer ping al servidor cuando la aplicación se cargue
+        this.checkServerStatus();
+  }
+   // Método para hacer ping al servidor
+   checkServerStatus() {
+    this.http.get(this.apiUrl, { responseType: 'text' }) // Hacemos una solicitud GET al servidor
+      .pipe(
+        catchError(() => {
+          // Si hay un error, asumimos que el servidor está offline
+          this.serverStatus = 'offline';
+          console.log('El servidor está offline.');
+          return [];
+        })
+      )
+      .subscribe(() => {
+        // Si la solicitud es exitosa, el servidor está online
+        this.serverStatus = 'online';
+        console.log('El servidor está online.');
+      });
+  }
 }
