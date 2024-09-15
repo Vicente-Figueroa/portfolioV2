@@ -18,7 +18,7 @@ import { catchError } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'Vicente';
   private apiUrl: string = environment.apiUrl + "/api/ping/"
-  public serverStatus: string = 'unknown'; // Estado inicial del servidor
+  public serverStatus: string = 'offline'; // Estado inicial del servidor
 
   constructor(private http: HttpClient) { }
 

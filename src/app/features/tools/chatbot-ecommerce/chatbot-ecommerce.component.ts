@@ -186,6 +186,12 @@ export class ChatbotEcommerceComponent implements OnInit {
       metadataMessage += `Input: ${response.input}\n`;
       metadataMessage += `Paso: ${response.step}\n\n`;
 
+      // Mostrar la intención más probable
+      if (response.intent && response.intent.most_probable_intent) {
+        metadataMessage += `Intención más probable: ${response.intent.most_probable_intent}\n`;
+      }
+
+      // Mostrar todas las intenciones con sus probabilidades
       if (response.intent && response.intent.options) {
         metadataMessage += "Intenciones detectadas:\n";
         for (const [intent, probability] of Object.entries(response.intent.options)) {
@@ -194,6 +200,12 @@ export class ChatbotEcommerceComponent implements OnInit {
         metadataMessage += '\n';
       }
 
+      // Mostrar la acción más probable
+      if (response.next_action && response.next_action.most_probable_action) {
+        metadataMessage += `Acción más probable: ${response.next_action.most_probable_action}\n`;
+      }
+
+      // Mostrar todas las acciones con sus probabilidades
       if (response.next_action && response.next_action.options) {
         metadataMessage += "Posibles acciones a ejecutar:\n";
         for (const [action, probability] of Object.entries(response.next_action.options)) {
@@ -202,6 +214,7 @@ export class ChatbotEcommerceComponent implements OnInit {
         metadataMessage += '\n';
       }
 
+      // Mostrar el agente que está manejando la conversación
       if (response.agent) {
         metadataMessage += `Agente: ${response.agent}\n\n`;
       }
@@ -217,10 +230,14 @@ export class ChatbotEcommerceComponent implements OnInit {
       agentMessage = "Lo siento, no pude generar una respuesta en este momento.";
     }
 
+    // Añadir el resultado de la acción si está presente
+    if (response.action_result) {
+      agentMessage += `\n\nResultado de la acción: ${response.action_result}`;
+    }
+
     // Añadir la respuesta del agente como un mensaje separado
     this.addMessage(`Chatbot: ${agentMessage}`);
   }
-
   clearLocalStorage(): void {
     localStorage.removeItem('conversation');
     localStorage.removeItem('messageCount');
