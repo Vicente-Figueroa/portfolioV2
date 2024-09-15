@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Renderer2 } from '@angular/core';
 import {
   HttpClient,
   HttpClientModule,
@@ -28,20 +28,60 @@ export class ChatComponent implements OnInit {
   showWhatsAppButton = true; // Mostrar el botón de WhatsApp por defecto
   whatsappLink = 'https://wa.me/56974104013?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20tus%20servicios.';
   isWhatsAppClosed = false; // Controla si el mensaje de WhatsApp ha sido cerrado
+  serverStatus!: string
+  private storageListener: any; // Para almacenar el listener de localStorage
+
   @Output() closeChatEvent = new EventEmitter<void>();
 
   private apiUrl = environment.apiUrl; // Accede a la URL del backend desde el entorno
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.loadConversation(); // Cargar cualquier conversación guardada
     this.loadPopupState();   // Cargar el estado del popup y si ya se envió el correo
     this.loadWhatsAppState(); // Cargar el estado del mensaje de WhatsApp
 
+    // Verificar si el bot está iniciado al cargar el componente
+    this.serverStatus = localStorage.getItem('serverStatus') || 'online';
+    if (this.serverStatus === 'offline') {
+      this.disableChat();
+    }
+
+    // Escuchar cambios en localStorage para detectar cambios en el estado del bot
+    this.storageListener = this.renderer.listen('window', 'storage', (event) => {
+      if (event.key === 'botStatus') {
+        this.serverStatus = event.newValue;
+        if (this.serverStatus === 'offline') {
+          this.disableChat();
+        } else if (this.serverStatus === 'online') {
+          this.enableChat();
+        }
+      }
+    });
+
+
     if (this.conversation.length === 0) {
       this.getInitialMessage(); // Llamamos a la función para obtener el mensaje inicial solo si no hay conversación previa
     }
+  }
+
+
+  // Método para deshabilitar el chat cuando el bot no esté iniciado
+  disableChat() {
+    this.loading = true; // Simular estado de carga
+    this.addMessage('Chatbot', 'El bot no está disponible en este momento. Por favor, intenta más tarde.');
+  }
+
+  // Método para habilitar el chat cuando el bot esté iniciado
+  enableChat() {
+    this.loading = false; // Dejar de simular estado de carga
+    this.addMessage('Chatbot', 'El bot está disponible. Puedes continuar.');
+  }
+
+  // Método para agregar un mensaje al área de conversación
+  addMessage(sender: string, message: string) {
+    this.conversation.push(`${sender}: ${message}`);
   }
 
   getInitialMessage() {
