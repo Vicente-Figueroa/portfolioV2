@@ -122,31 +122,42 @@ export class ChatbotEcommerceComponent implements OnInit {
         this.loading = false;
       });
   }
+  debugMode: boolean = true; // Cambiar a true para ver información detallada
 
   private processResponse(response: any) {
     let message = '';
 
-    // Añadir el texto de entrada del usuario
-    message += `Input: ${response.input}\n`;
+    // Modo de depuración: muestra información detallada
+    if (this.debugMode) {
+      message += `Input: ${response.input}\n`;
+      message += `Paso: ${response.step}\n\n`;
 
-    // Añadir el paso actual
-    message += `Paso: ${response.step}\n\n`;
-
-    // Procesar las intenciones detectadas
-    if (response.intent && response.intent.options) {
-      message += "Intenciones detectadas:\n";
-      for (const [intent, probability] of Object.entries(response.intent.options)) {
-        message += `- ${intent}: ${(probability as number * 100).toFixed(2)}%\n`;
+      if (response.intent && response.intent.options) {
+        message += "Intenciones detectadas:\n";
+        for (const [intent, probability] of Object.entries(response.intent.options)) {
+          message += `- ${intent}: ${(probability as number * 100).toFixed(2)}%\n`;
+        }
+        message += '\n';
       }
-      message += '\n';
+
+      if (response.next_action && response.next_action.options) {
+        message += "Posibles acciones a ejecutar:\n";
+        for (const [action, probability] of Object.entries(response.next_action.options)) {
+          message += `- ${action}: ${(probability as number * 100).toFixed(2)}%\n`;
+        }
+        message += '\n';
+      }
+
+      if (response.agent) {
+        message += `Agente: ${response.agent}\n\n`;
+      }
     }
 
-    // Procesar las posibles acciones siguientes
-    if (response.next_action && response.next_action.options) {
-      message += "Posibles acciones siguientes:\n";
-      for (const [action, probability] of Object.entries(response.next_action.options)) {
-        message += `- ${action}: ${(probability as number * 100).toFixed(2)}%\n`;
-      }
+    // Añadir la respuesta del agente si está disponible
+    if (response.agent_response) {
+      message += response.agent_response;
+    } else {
+      message += "Lo siento, no pude generar una respuesta en este momento.";
     }
 
     // Añadir el mensaje del chatbot

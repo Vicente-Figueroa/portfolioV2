@@ -68,10 +68,10 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" [(ngModel)]="userInput" placeholder="Escribe tu mensaje aquí..."
                     (keyup.enter)="sendMessage()" [disabled]="loading">
-                <button class="btn btn-primary" type="button" (click)="sendMessage()" [disabled]="loading">
+                <button class="btn btn-primary m-1" type="button" (click)="sendMessage()" [disabled]="loading">
                     <i class="bi bi-send"></i> Enviar
                 </button>
-                <button class="btn btn-danger" type="button" (click)="clearLocalStorage()">
+                <button class="btn btn-danger m-1" type="button" (click)="clearLocalStorage()">
                     <i class="bi bi-trash"></i> Borrar conversación
                 </button>
             </div>
