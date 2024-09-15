@@ -19,6 +19,7 @@ export class ChatbotEcommerceComponent implements OnInit {
   public userInput: string = '';
   public loading: boolean = false;
   public messageCount: number = 0;  // Contador de mensajes del usuario
+  debugMode: boolean = false; // Cambiar a true para ver información detallada
 
   @ViewChild('conversationContainer') private conversationContainer!: ElementRef;
 
@@ -122,12 +123,12 @@ export class ChatbotEcommerceComponent implements OnInit {
         this.loading = false;
       });
   }
-  debugMode: boolean = true; // Cambiar a true para ver información detallada
 
   private processResponse(response: any) {
     let message = '';
 
-    // Modo de depuración: muestra información detallada
+    // Modo de depuración: muestra información detallada solo si debugMode es true
+    console.log(this.debugMode)
     if (this.debugMode) {
       message += `Input: ${response.input}\n`;
       message += `Paso: ${response.step}\n\n`;
@@ -163,7 +164,6 @@ export class ChatbotEcommerceComponent implements OnInit {
     // Añadir el mensaje del chatbot
     this.addMessage(`Chatbot: ${message}`);
   }
-
   clearLocalStorage(): void {
     localStorage.removeItem('conversation');
     localStorage.removeItem('messageCount');
