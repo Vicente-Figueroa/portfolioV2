@@ -21,6 +21,7 @@ export class ChatbotEcommerceComponent implements OnInit {
   public loading: boolean = false;
   public messageCount: number = 0;
   public debugMode: boolean = true; // Inicialmente en false, para evitar conflictos
+  public serverStatus: string = 'unknown'; // Estado del servidor
 
   @ViewChild('conversationContainer') private conversationContainer!: ElementRef;
 
@@ -29,7 +30,6 @@ export class ChatbotEcommerceComponent implements OnInit {
   ngOnInit() {
     // Cargar el modo debug guardado en localStorage, si existe
     const savedDebugMode = localStorage.getItem('debugMode');
-
     // Si existe en localStorage, usar ese valor, de lo contrario, inicializar en false
     this.debugMode = savedDebugMode === 'true';
 
@@ -44,6 +44,45 @@ export class ChatbotEcommerceComponent implements OnInit {
     if (savedMessageCount) {
       this.messageCount = parseInt(savedMessageCount, 10);
     }
+
+    // Verificar el estado del servidor desde localStorage
+    const savedServerStatus = localStorage.getItem('serverStatus');
+    if (savedServerStatus) {
+      this.serverStatus = savedServerStatus;
+    }
+
+    // Actuar en función del estado del servidor
+    if (this.serverStatus === 'online') {
+      this.startChatbot(); // Iniciar el chatbot normalmente
+    } else {
+      this.showLoadingMessage(); // Mostrar mensaje de "cargando" o "intentando conectar"
+      this.checkServerPeriodically(); // Intentar reconectar periódicamente
+    }
+  }
+
+  // Método para iniciar el chatbot normalmente
+  startChatbot() {
+    // Lógica para iniciar el chatbot
+    console.log('Chatbot iniciado. El servidor está online.');
+  }
+
+  // Método para mostrar el mensaje de "cargando" o "intentando conectar"
+  showLoadingMessage() {
+    this.conversation.push('El servidor no está disponible en este momento, intentando conectar...');
+    this.loading = true;
+  }
+
+  // Método para verificar el estado del servidor periódicamente
+  checkServerPeriodically() {
+    const interval = setInterval(() => {
+      const currentServerStatus = localStorage.getItem('serverStatus');
+      if (currentServerStatus === 'online') {
+        clearInterval(interval); // Detener el intervalo si el servidor vuelve a estar online
+        this.serverStatus = 'online';
+        this.loading = false;
+        this.startChatbot(); // Iniciar el chatbot cuando el servidor esté disponible
+      }
+    }, 3000); // Verificar cada 3 segundos
   }
 
   // Método para manejar el cambio de debugMode y guardarlo en localStorage

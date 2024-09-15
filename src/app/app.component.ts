@@ -20,20 +20,21 @@ export class AppComponent implements OnInit {
   private apiUrl: string = environment.apiUrl + "/api/ping/"
   public serverStatus: string = 'unknown'; // Estado inicial del servidor
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
   ngOnInit(): void {
-        // Hacer ping al servidor cuando la aplicación se cargue
-        this.checkServerStatus();
+    // Hacer ping al servidor cuando la aplicación se cargue
+    this.checkServerStatus();
   }
-   // Método para hacer ping al servidor
-   checkServerStatus() {
+  // Método para hacer ping al servidor
+  checkServerStatus() {
     this.http.get(this.apiUrl, { responseType: 'text' }) // Hacemos una solicitud GET al servidor
       .pipe(
         catchError(() => {
           // Si hay un error, asumimos que el servidor está offline
           this.serverStatus = 'offline';
+          localStorage.setItem('serverStatus', 'offline'); // Guardar el estado en localStorage
           console.log('El servidor está offline.');
           return [];
         })
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
       .subscribe(() => {
         // Si la solicitud es exitosa, el servidor está online
         this.serverStatus = 'online';
+        localStorage.setItem('serverStatus', 'online'); // Guardar el estado en localStorage
         console.log('El servidor está online.');
       });
   }
