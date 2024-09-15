@@ -45,20 +45,41 @@
                 </div>
             </div>
 
+            <!-- Switch para activar/desactivar el modo debug -->
+            <div class="form-check form-switch mb-4">
+                <input class="form-check-input" type="checkbox" id="debugModeSwitch" [(ngModel)]="debugMode"
+                    (change)="toggleDebugMode()">
+                <label class="form-check-label" for="debugModeSwitch">Modo Debug</label>
+            </div>
+
             <!-- Conversation area -->
             <div #conversationContainer class="conversation-area mb-4"
                 style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; padding-bottom: 20px; background-color: #f8f9fa;">
                 <div *ngFor="let message of conversation" class="mb-3">
+                    <!-- Mensaje del usuario -->
                     <div *ngIf="message.startsWith('Usuario:')" class="text-end">
-                        <span class="bg-primary text-white py-2 px-3  d-inline-block user-message">
+                        <span class="bg-primary text-white py-2 px-3 d-inline-block user-message">
                             {{ message }}
                         </span>
                     </div>
+
+                    <!-- Metadata del Chatbot -->
+                    <div *ngIf="message.startsWith('Chatbot (Metadata):')" class="chatbot-metadata">
+                        <div class="bg-light border rounded p-3">
+                            <strong class="d-block mb-2">Metadata del Chatbot:</strong>
+                            <pre style="white-space: pre-wrap; font-family: inherit; margin-bottom: 0;">
+                    {{ message.substring(19) }} <!-- Remover "Chatbot (Metadata):" -->
+                </pre>
+                        </div>
+                    </div>
+
+                    <!-- Respuesta del Chatbot -->
                     <div *ngIf="message.startsWith('Chatbot:')" class="chatbot-response">
                         <div class="bg-light border rounded p-3">
                             <strong class="d-block mb-2">Respuesta del Chatbot:</strong>
-                            <pre
-                                style="white-space: pre-wrap; font-family: inherit; margin-bottom: 0;">{{ message.substring(8) }}</pre>
+                            <pre style="white-space: pre-wrap; font-family: inherit; margin-bottom: 0;">
+                    {{ message.substring(8) }} <!-- Remover "Chatbot:" -->
+                </pre>
                         </div>
                     </div>
                 </div>

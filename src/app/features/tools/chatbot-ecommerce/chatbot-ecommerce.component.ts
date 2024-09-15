@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './chatbot-ecommerce.component.html',
-  styleUrls: ['./chatbot-ecommerce.component.css']  // Corrección de typo
+  styleUrls: ['./chatbot-ecommerce.component.css']
 })
 export class ChatbotEcommerceComponent implements OnInit {
 
@@ -18,8 +18,8 @@ export class ChatbotEcommerceComponent implements OnInit {
   public conversation: string[] = [];
   public userInput: string = '';
   public loading: boolean = false;
-  public messageCount: number = 0;  // Contador de mensajes del usuario
-  debugMode: boolean = false; // Cambiar a true para ver información detallada
+  public messageCount: number = 0;
+  public debugMode: boolean = false; // Inicialmente desactivado
 
   @ViewChild('conversationContainer') private conversationContainer!: ElementRef;
 
@@ -29,6 +29,7 @@ export class ChatbotEcommerceComponent implements OnInit {
     // Cargar la conversación y el contador desde el almacenamiento local al iniciar
     const savedConversation = localStorage.getItem('conversation');
     const savedMessageCount = localStorage.getItem('messageCount');
+    const savedDebugMode = localStorage.getItem('debugMode'); // Cargar el modo debug desde localStorage
 
     if (savedConversation) {
       this.conversation = JSON.parse(savedConversation);
@@ -37,6 +38,17 @@ export class ChatbotEcommerceComponent implements OnInit {
     if (savedMessageCount) {
       this.messageCount = parseInt(savedMessageCount, 10);
     }
+
+    // Aplicar el modo debug guardado en localStorage
+    if (savedDebugMode !== null) {
+      this.debugMode = savedDebugMode === 'true'; // Convertir a booleano
+    }
+  }
+
+  // Método para alternar el modo debug
+  toggleDebugMode(): void {
+    this.debugMode = !this.debugMode; // Cambiar el estado de debugMode
+    localStorage.setItem('debugMode', this.debugMode.toString()); // Guardar el estado en localStorage
   }
 
   // Método para guardar la conversación y el contador en localStorage
@@ -92,6 +104,7 @@ export class ChatbotEcommerceComponent implements OnInit {
       });
     });
   }
+
   sendMessage() {
     if (this.userInput.trim() === '') {
       return;
@@ -125,49 +138,55 @@ export class ChatbotEcommerceComponent implements OnInit {
   }
 
   private processResponse(response: any) {
-    let message = '';
+    let metadataMessage = '';
+    let agentMessage = '';
 
     // Modo de depuración: muestra información detallada solo si debugMode es true
-    console.log(this.debugMode)
     if (this.debugMode) {
-      message += `Input: ${response.input}\n`;
-      message += `Paso: ${response.step}\n\n`;
+      metadataMessage += `Input: ${response.input}\n`;
+      metadataMessage += `Paso: ${response.step}\n\n`;
 
       if (response.intent && response.intent.options) {
-        message += "Intenciones detectadas:\n";
+        metadataMessage += "Intenciones detectadas:\n";
         for (const [intent, probability] of Object.entries(response.intent.options)) {
-          message += `- ${intent}: ${(probability as number * 100).toFixed(2)}%\n`;
+          metadataMessage += `- ${intent}: ${(probability as number * 100).toFixed(2)}%\n`;
         }
-        message += '\n';
+        metadataMessage += '\n';
       }
 
       if (response.next_action && response.next_action.options) {
-        message += "Posibles acciones a ejecutar:\n";
+        metadataMessage += "Posibles acciones a ejecutar:\n";
         for (const [action, probability] of Object.entries(response.next_action.options)) {
-          message += `- ${action}: ${(probability as number * 100).toFixed(2)}%\n`;
+          metadataMessage += `- ${action}: ${(probability as number * 100).toFixed(2)}%\n`;
         }
-        message += '\n';
+        metadataMessage += '\n';
       }
 
       if (response.agent) {
-        message += `Agente: ${response.agent}\n\n`;
+        metadataMessage += `Agente: ${response.agent}\n\n`;
       }
+
+      // Añadir la metadata como un mensaje separado
+      this.addMessage(`Chatbot (Metadata): ${metadataMessage}`);
     }
 
-    // Añadir la respuesta del agente si está disponible
+    // Preparar la respuesta del agente
     if (response.agent_response) {
-      message += response.agent_response;
+      agentMessage = response.agent_response;
     } else {
-      message += "Lo siento, no pude generar una respuesta en este momento.";
+      agentMessage = "Lo siento, no pude generar una respuesta en este momento.";
     }
 
-    // Añadir el mensaje del chatbot
-    this.addMessage(`Chatbot: ${message}`);
+    // Añadir la respuesta del agente como un mensaje separado
+    this.addMessage(`Chatbot: ${agentMessage}`);
   }
+
   clearLocalStorage(): void {
     localStorage.removeItem('conversation');
     localStorage.removeItem('messageCount');
+    localStorage.removeItem('debugMode'); // Limpiar el modo debug
     this.conversation = [];
     this.messageCount = 0;
+    this.debugMode = false; // Resetear el modo debug
   }
 }
