@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // Eliminar el local item server-status
+    localStorage.removeItem('serverStatus');
     // Hacer ping al servidor cuando la aplicación se cargue
     this.checkServerStatus();
   }
