@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { interval, Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-server-status',
@@ -59,6 +59,7 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
   checkServerStatus() {
     this.http.get(this.apiUrl, { responseType: 'text' }) // Hacemos una solicitud GET al servidor
       .pipe(
+        timeout(3000), // Timeout de 3 segundos
         catchError(() => {
           // Si hay un error, asumimos que el servidor está offline
           this.serverStatus = 'offline';

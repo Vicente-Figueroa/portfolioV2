@@ -24,7 +24,6 @@ export class ResumeComponent implements OnInit {
     this.http.get<Resume>('data/resume.json')
       .subscribe(
         (data) => {
-          console.log('Datos cargados:', data);
           this.data = data;
         },
         (error) => {

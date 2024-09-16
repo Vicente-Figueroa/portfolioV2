@@ -46,7 +46,6 @@ export class ContactComponent {
     }
 
     // No restablezcas el objeto contact aquí si quieres que el nombre se siga mostrando en el HTML
-    console.log(this.contact); // Muestra el nombre en la consola
     this.name = this.contact.name;
 
     const contactData = {

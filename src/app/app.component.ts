@@ -6,7 +6,7 @@ import { ChatButtonComponent } from './components/chat-button/chat-button.compon
 import { OnboardingComponent } from './features/onboarding/onboarding.component';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   checkServerStatus() {
     this.http.get(this.apiUrl, { responseType: 'text' }) // Hacemos una solicitud GET al servidor
       .pipe(
+        timeout(3000), // Timeout de 3 segundos
         catchError(() => {
           // Si hay un error, asumimos que el servidor está offline
           this.serverStatus = 'offline';
