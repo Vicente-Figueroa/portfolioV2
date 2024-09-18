@@ -42,7 +42,26 @@
     .form-check.form-switch {
         margin-right: 20px;
     }
-    .form-check{
+
+    .form-check {
         font-size: 0.8em;
     }
+}
+
+.dropdown-menu {
+    padding: 10px 0;
+}
+
+.dropdown-menu .nav-item {
+    padding: 5px 0;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f8f9fa;
 }
