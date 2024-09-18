@@ -1,0 +1,82 @@
+  .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+  }
+
+  .overlay-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+  }
+
+  .spinner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+  }
+
+  .btn-outline {
+      background-color: transparent;
+      border: 2px solid;
+      transition: all 0.3s ease;
+  }
+
+  .btn-outline:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-outline-secondary {
+      color: #6c757d;
+      border-color: #6c757d;
+  }
+
+  .btn-outline-secondary:hover {
+      color: #fff;
+      background-color: #6c757d;
+  }
+
+  .btn-outline-primary {
+      color: #007bff;
+      border-color: #007bff;
+  }
+
+  .btn-outline-primary:hover {
+      color: #fff;
+      background-color: #007bff;
+  }
+
+  .btn-outline-success {
+      color: #28a745;
+      border-color: #28a745;
+  }
+
+  .btn-outline-success:hover {
+      color: #fff;
+      background-color: #28a745;
+  }
+
+  .btn-outline-danger {
+      color: #dc3545;
+      border-color: #dc3545;
+  }
+
+  .btn-outline-danger:hover {
+      color: #fff;
+      background-color: #dc3545;
+  }

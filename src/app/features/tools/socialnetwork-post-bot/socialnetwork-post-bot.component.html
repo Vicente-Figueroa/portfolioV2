@@ -1,0 +1,196 @@
+<section class="py-5">
+    <div class="container px-5">
+        <!-- Formulario principal -->
+        <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+            <div class="text-center mb-5 tittle">
+                <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3">
+                    <i class="bi bi-share"></i>
+                </div>
+                <h1 class="fw-bolder">Bot de Publicación en Redes Sociales</h1>
+                <p class="lead fw-normal text-muted mb-0">Crea tus publicaciones con IA Generativa</p>
+            </div>
+            <div class="row gx-5 justify-content-center form">
+                <div class="col-lg-8 col-xl-6">
+                    <form id="postForm" (ngSubmit)="submitPost()">
+                        <!-- Services input -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="services-main" type="text" placeholder="Servicios ofrecidos"
+                                [(ngModel)]="post.services" name="services" required>
+                            <label for="services-main">Servicios</label>
+                        </div>
+                        <!-- Target audience input -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="target-main" type="text" placeholder="Público objetivo"
+                                [(ngModel)]="post.target" name="target" required>
+                            <label for="target-main">Público Objetivo</label>
+                        </div>
+                        <!-- Business name input -->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="businessName-main" type="text"
+                                placeholder="Nombre del negocio" [(ngModel)]="post.businessName" name="businessName"
+                                required>
+                            <label for="businessName-main">Nombre del Negocio</label>
+                        </div>
+                        <!-- Content input -->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="content-main" placeholder="Contenido de la publicación"
+                                [(ngModel)]="post.content" name="content" style="height: 10rem" required></textarea>
+                            <label for="content-main">Contenido</label>
+                        </div>
+                        <!-- Include photo section -->
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="includePhoto-main"
+                                        [(ngModel)]="post.includePhoto" name="includePhoto">
+                                    <label class="form-check-label" for="includePhoto-main">
+                                        Incluir foto
+                                    </label>
+                                </div>
+                                <span class="ms-2" title="Subir fotos estará disponible próximamente">
+                                    <i class="bi bi-info-circle"></i>
+                                </span>
+                            </div>
+
+                            <!-- URL input for photo, shown only when includePhoto is checked -->
+                            <div *ngIf="post.includePhoto" class="mt-2">
+                                <div class="form-floating">
+                                    <input class="form-control" id="photoUrl-main" type="url"
+                                        placeholder="URL de la imagen" [(ngModel)]="post.photoUrl" name="photoUrl"
+                                        required>
+                                    <label for="photoUrl-main">URL de la imagen</label>
+                                </div>
+                            </div>
+
+                            <!-- Disabled upload option -->
+                            <div class="mt-2">
+                                <button class="btn btn-secondary btn-sm" disabled>
+                                    <i class="bi bi-upload"></i> Subir foto (Próximamente)
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Facebook Token Section -->
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="useFacebookToken-main"
+                                        [(ngModel)]="post.useFacebookToken" name="useFacebookToken">
+                                    <label class="form-check-label" for="useFacebookToken-main">
+                                        Usar Token de Facebook
+                                    </label>
+                                </div>
+                                <span class="ms-2"
+                                    title="El token de Facebook es necesario para publicar automáticamente">
+                                    <i class="bi bi-info-circle"></i>
+                                </span>
+                            </div>
+
+                            <!-- Token input, shown only when useFacebookToken is checked -->
+                            <div *ngIf="post.useFacebookToken" class="mt-2">
+                                <div class="form-floating">
+                                    <input class="form-control" id="facebookToken-main" type="password"
+                                        placeholder="Token de Facebook" [(ngModel)]="post.facebookToken"
+                                        name="facebookToken" required>
+                                    <label for="facebookToken-main">Token de Facebook</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button class="btn btn-dark-2 btn-lg" type="submit">
+                                Publicar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Overlay para el mensaje de éxito -->
+        <div id="successOverlay" class="overlay" style="display: none;">
+            <div class="overlay-content">
+                <h2>Post publicado exitosamente</h2>
+                <button id="closeOverlay" class="btn btn-primary">Cerrar</button>
+            </div>
+        </div>
+
+        <!-- Spinner de carga -->
+        <div id="loadingSpinner" class="spinner" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+        <!-- Botón para abrir/cerrar la configuración -->
+        <button class="btn btn-primary mb-3 mt-3" (click)="toggleConfig()">
+            {{ isConfigOpen ? 'Cerrar Configuración' : 'Abrir Configuración' }}
+        </button>
+
+        <!-- Sección de configuración desplegable -->
+        <div class="collapse" [ngClass]="{'show': isConfigOpen}">
+            <div class="bg-light rounded-4  px-4 px-md-5">
+                <h2 class="mb-4">Configuración</h2>
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-outline btn-outline-secondary" (click)="toggleEditMode()">
+                                {{ isEditMode ? 'Cancelar Edición' : 'Editar Datos' }}
+                            </button>
+                            <div *ngIf="isEditMode">
+                                <div class="mb-3">
+                                    <label for="services-config" class="form-label">Servicios</label>
+                                    <input type="text" class="form-control" id="services-config"
+                                        [(ngModel)]="post.services">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="target-config" class="form-label">Público Objetivo</label>
+                                    <input type="text" class="form-control" id="target-config"
+                                        [(ngModel)]="post.target">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="businessName-config" class="form-label">Nombre del Negocio</label>
+                                    <input type="text" class="form-control" id="businessName-config"
+                                        [(ngModel)]="post.businessName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="content-config" class="form-label">Contenido</label>
+                                    <textarea class="form-control" id="content-config" rows="3"
+                                        [(ngModel)]="post.content"></textarea>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="includePhoto-config"
+                                        [(ngModel)]="post.includePhoto">
+                                    <label class="form-check-label" for="includePhoto-config">Incluir Foto</label>
+                                </div>
+                                <div class="mb-3" *ngIf="post.includePhoto">
+                                    <label for="photoUrl-config" class="form-label">URL de la Foto</label>
+                                    <input type="text" class="form-control" id="photoUrl-config"
+                                        [(ngModel)]="post.photoUrl">
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="useFacebookToken-config"
+                                        [(ngModel)]="post.useFacebookToken">
+                                    <label class="form-check-label" for="useFacebookToken-config">Usar Token de
+                                        Facebook</label>
+                                </div>
+                                <div class="mb-3" *ngIf="post.useFacebookToken">
+                                    <label for="facebookToken-config" class="form-label">Token de Facebook</label>
+                                    <input type="password" class="form-control" id="facebookToken-config"
+                                        [(ngModel)]="post.facebookToken">
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-outline-primary" (click)="savePreferences()"
+                                *ngIf="isEditMode">
+                                Guardar Cambios
+                            </button>
+                            <button class="btn btn-outline btn-outline-success" (click)="quickSubmit()">
+                                Envío Rápido
+                            </button>
+                            <button class="btn btn-outline btn-outline-danger" (click)="clearSavedData()">
+                                Borrar Datos Guardados
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

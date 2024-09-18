@@ -5,11 +5,13 @@ import { ProjectsComponent } from './features/projects/projects.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { ChatComponent } from './components/chat-button/chat/chat.component';
 import { ChatbotEcommerceComponent } from './features/tools/chatbot-ecommerce/chatbot-ecommerce.component';
+import { SocialnetworkPostBotComponent } from './features/tools/socialnetwork-post-bot/socialnetwork-post-bot.component';
 
 export const routes: Routes = [
   { path: 'resume', component: ResumeComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'ecommerce', component: ChatbotEcommerceComponent },
+  { path: 'socialnetwork-bot', component: SocialnetworkPostBotComponent },
   { path: '**', component: HomeComponent },
 ];
