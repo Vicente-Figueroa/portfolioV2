@@ -1,0 +1,35 @@
+<div class="chat-container">
+    <h1 class="fw-bolder">Notion-Chatbot</h1> 
+    <p class="lead fw-normal text-muted mb-4">Gestiona tus tareas de Notion</p>
+  
+    <div class="conversation-area mb-4"
+      style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: #f8f9fa;">
+  
+      <div *ngFor="let message of conversation" class="mb-3">
+        <div *ngIf="message.startsWith('Usuario:')" class="text-end">
+          <span class="bg-primary text-white py-2 px-3 d-inline-block user-message">
+            {{ message }}
+          </span>
+        </div>
+        <div *ngIf="message.startsWith('Chatbot:')" class="chatbot-response">
+          <span class="bg-light text-dark py-2 px-3 d-inline-block chatbot-message">
+            {{ message }} 
+          </span>
+        </div>
+      </div>
+  
+      <div *ngIf="cargando" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" [(ngModel)]="mensajeUsuario" 
+        placeholder="Escribe tu mensaje aquí..." (keyup.enter)="enviarMensaje()" 
+        [disabled]="cargando">
+      <button class="btn btn-primary" type="button" (click)="enviarMensaje()" 
+        [disabled]="cargando">Enviar</button>
+    </div>
+  </div>
