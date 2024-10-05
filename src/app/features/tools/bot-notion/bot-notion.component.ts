@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,27 +14,25 @@ export class BotNotionComponent {
   mensajeUsuario: string = '';
   respuestaBot: string = '';
   cargando: boolean = false;
-  conversation: string[] = []; // Array para almacenar la conversación
-  private apiUrl = 'https://botnotion-cnlz323f4-vicente-figueroas-projects.vercel.app/chat';
+  conversation: string[] = [];
+  private apiUrl = 'https://botnotion.vercel.app/chat';
 
-  constructor(private http: HttpClient) { } // Inyecta HttpClient
+  constructor(private http: HttpClient) { }
 
   enviarMensaje() {
     if (this.mensajeUsuario.trim() === '') {
-      return; // No enviar mensajes vacíos
+      return;
     }
 
-    this.conversation.push('Usuario: ' + this.mensajeUsuario); // Agregar mensaje del usuario a la conversación
-    this.mensajeUsuario = ''; // Limpiar el input del usuario
+    this.conversation.push('Usuario: ' + this.mensajeUsuario);
+    const mensajeEnviado = this.mensajeUsuario;
+    this.mensajeUsuario = '';
     this.cargando = true;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin':'*'
-    });
-    this.http.post<any>(this.apiUrl, { mensaje: this.mensajeUsuario }, { headers: headers }).subscribe({
+
+    this.http.post<any>(this.apiUrl, { mensaje: mensajeEnviado }).subscribe({
       next: (response) => {
         this.respuestaBot = response.respuesta;
-        this.conversation.push('Chatbot: ' + this.respuestaBot); // Agregar respuesta del bot a la conversación
+        this.conversation.push('Chatbot: ' + this.respuestaBot);
         this.cargando = false;
       },
       error: (error) => {
