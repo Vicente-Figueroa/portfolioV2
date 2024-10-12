@@ -22,9 +22,6 @@ export class ChatComponent implements OnInit {
   conversation: string[] = []; // Almacena la conversación
   loading = true;
   messageCount = 0; // Cuenta los mensajes enviados
-  showPopup = false; // Controla la visibilidad del popup
-  isEmailValid = false; // Controla la validez del correo electrónico
-  emailSent = false; // Controla si el correo ya fue enviado
   showWhatsAppButton = true; // Mostrar el botón de WhatsApp por defecto
   whatsappLink = 'https://wa.me/56974104013?text=Hola%2C%20me%20gustaría%20obtener%20más%20información%20sobre%20tus%20servicios.';
   isWhatsAppClosed = false; // Controla si el mensaje de WhatsApp ha sido cerrado
@@ -39,7 +36,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadConversation(); // Cargar cualquier conversación guardada
-    this.loadPopupState();   // Cargar el estado del popup y si ya se envió el correo
     this.loadWhatsAppState(); // Cargar el estado del mensaje de WhatsApp
 
     // Verificar si el bot está iniciado al cargar el componente
@@ -79,9 +75,11 @@ export class ChatComponent implements OnInit {
     this.addMessage('Chatbot', 'El bot está disponible. Puedes continuar.');
   }
 
-  // Método para agregar un mensaje al área de conversación
+  // Método para agregar un mensaje al área de conversación, eliminando "user" o "assistant" si está al inicio
   addMessage(sender: string, message: string) {
-    this.conversation.push(`${sender}: ${message}`);
+    // Expresión regular que busca "user " o "assistant " al inicio de la cadena
+    const cleanedMessage = message.replace(/^(User:|Assistant)\s/, '');
+    this.conversation.push(` ${cleanedMessage}`);
   }
 
   getInitialMessage() {
@@ -132,23 +130,19 @@ export class ChatComponent implements OnInit {
     return message.replace(/```/g, '').replace(/\n/g, '').replace('**', '');
   }
 
+
+  private resetQuestion(): void {
+    this.question = '';
+  }
+
   private updateConversation(question: string, response: string): void {
-    this.conversation.push(`Tu: ${question}`);
-    this.conversation.push(response);
+    // Cambiar "Tu" por "User" y añadir "Assistant" al mensaje de respuesta
+    this.conversation.push(`${question}`);
+    this.conversation.push(`Assistant: ${response}`);
     this.messageCount++;
 
     // Guardar la conversación en localStorage
     this.saveConversation();
-
-    // Mostrar el popup después de 2 mensajes y si el correo no fue enviado
-    if (this.messageCount > 2 && !this.emailSent && !this.showPopup) {
-      this.showPopup = true;
-      this.savePopupState(); // Guardar el estado del popup en localStorage
-    }
-  }
-
-  private resetQuestion(): void {
-    this.question = '';
   }
 
   private saveConversation(): void {
@@ -167,17 +161,7 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  private savePopupState(): void {
-    localStorage.setItem('showPopup', JSON.stringify(this.showPopup));
-    localStorage.setItem('emailSent', JSON.stringify(this.emailSent)); // Guardar si ya se envió el correo
-  }
 
-  private loadPopupState(): void {
-    const savedPopupState = localStorage.getItem('showPopup');
-    const emailSentState = localStorage.getItem('emailSent');
-    this.showPopup = savedPopupState ? JSON.parse(savedPopupState) : false;
-    this.emailSent = emailSentState ? JSON.parse(emailSentState) : false; // Cargar si ya se envió el correo
-  }
 
   // Nueva función para cerrar el mensaje de WhatsApp
   closeWhatsAppMessage(): void {
@@ -199,37 +183,11 @@ export class ChatComponent implements OnInit {
     // Limpiar la conversación en la pantalla
     this.conversation = [];
     this.messageCount = 0;
-    this.showPopup = false;
     this.isWhatsAppClosed = false;
   }
 
   validateEmail(): void {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    this.isEmailValid = emailPattern.test(this.email);
-  }
-
-  closePopup() {
-    if (this.isEmailValid) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-      });
-      const body = { email: this.email };
-
-      this.http
-        .post(`${this.apiUrl}/api/send-email/`, body, { headers: headers })
-        .subscribe(
-          (response: any) => {
-            console.log('Correo enviado:', response);
-            this.email = ''; // Limpiar el campo de correo después de enviarlo
-            this.showPopup = false; // Cerrar el popup después de enviar el correo
-            this.emailSent = true; // Marcar que el correo ya fue enviado
-            this.savePopupState(); // Guardar el estado del popup y el correo enviado
-          },
-          (error) => {
-            console.error('Error al enviar el correo:', error);
-          }
-        );
-    }
   }
 
   closeChat() {

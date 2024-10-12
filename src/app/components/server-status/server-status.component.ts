@@ -57,7 +57,7 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
 
   // Método para hacer ping al servidor
   checkServerStatus() {
-    this.http.get(this.apiUrl, { responseType: 'text' }) // Hacemos una solicitud GET al servidor
+    this.http.get(this.apiUrl, { responseType: 'json' }) // Hacemos una solicitud GET al servidor
       .pipe(
         timeout(3000), // Timeout de 3 segundos
         catchError(() => {

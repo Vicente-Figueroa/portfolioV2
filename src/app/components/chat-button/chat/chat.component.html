@@ -24,27 +24,17 @@
       <span class="sr-only"></span>
     </div>
   </div>
-
-  <!-- Email Input Popup as a chat message -->
-  <div *ngIf="showPopup" class="chat-message popup-message">
-    <p>Si quieres seguir chateando, envíame un correo para que hablemos.</p>
-    <input class="form-control" type="email" [(ngModel)]="email" placeholder="Ingresa tu correo"
-      (ngModelChange)="validateEmail()" />
-    <button class="btn btn-dark-2 email" (click)="closePopup()" [disabled]="!isEmailValid">
-      Enviar
-    </button>
-  </div>
 </div>
 
 <!-- Chat Footer -->
 <div class="chat-popup-footer">
   <input class="form-control" type="text" [(ngModel)]="question" placeholder="Ingresa tu pregunta"
-    (keyup.enter)="askQuestion()" [disabled]="showPopup" />
+    (keyup.enter)="askQuestion()"/>
   <div class="chat-footer-buttons">
     <button class="clear-conversation-btn" type="button" (click)="clearConversation()">
       Limpiar Conversación
     </button>
-    <button class="btn btn-dark-2 btn-lg" type="submit" [disabled]="loading || !question || showPopup"
+    <button class="btn btn-dark-2 btn-lg" type="submit" [disabled]="loading || !question "
       (click)="askQuestion()">
       Enviar
     </button>
