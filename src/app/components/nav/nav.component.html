@@ -15,34 +15,19 @@
         <li class="nav-item"><a class="nav-link" href="resume">Experiencia</a></li>
         <li class="nav-item"><a class="nav-link" href="projects">Proyectos</a></li>
         <li class="nav-item"><a class="nav-link" href="contact">Contacto</a></li>
-      </ul>
 
-      <!-- Modo desarrollador -->
-      <div class="d-flex align-items-center">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="navdebugModeSwitch" [(ngModel)]="debugMode"
-            (ngModelChange)="toggleNavDebugMode($event)">
-          <label class="form-check-label" for="navdebugModeSwitch">Modo desarrollador</label>
-        </div>
-      </div>
-
-      <!-- Opciones de depuración que se muestran solo si el modo debug está activado -->
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder" *ngIf="debugMode">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Apps en Desarrollo
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li class="nav-item"><a class="dropdown-item" href="/ecommerce">Chatbot Ecommerce</a></li>
-            <li class="nav-item"><a class="dropdown-item" href="/socialnetwork-bot">SocialNetwork Bot</a></li>
-          </ul>
-
+        <!-- Mostrar "Login" solo si NO está autenticado -->
+        <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+          <a class="nav-link" href="login">Login</a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#" (click)="resetOnboarding()">Resetear Onboarding</a></li>
 
-        <li><app-server-status></app-server-status></li>
+        <!-- Mostrar "Logout" solo si está autenticado -->
+        <li class="nav-item" *ngIf="authService.isAuthenticated()">
+          <a class="nav-link" href="#" (click)="logout()">Logout</a>
+        </li>
 
+        <!-- Mostrar <app-server-status> solo si el usuario está autenticado -->
+        <li *ngIf="authService.isAuthenticated()"><app-server-status></app-server-status></li>
       </ul>
     </div>
   </div>

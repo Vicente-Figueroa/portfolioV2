@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServerStatusComponent } from '../server-status/server-status.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../features/login/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,25 +13,17 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  public debugMode: boolean = false;
-
+  constructor(public authService: AuthService, private router: Router) { }
   ngOnInit() {
-    const savedDebugMode = localStorage.getItem('navDebugMode');
-    if (savedDebugMode === null) {
-      localStorage.setItem('navDebugMode', 'false');
-      this.debugMode = false;
-    } else {
-      this.debugMode = savedDebugMode === 'true';
-    }
-  }
-
-  toggleNavDebugMode(newValue: boolean) {
-    localStorage.setItem('navDebugMode', newValue.toString());
   }
 
   resetOnboarding() {
     localStorage.removeItem('hasSeenOnboarding');
     alert('¡Se recargará la página!');
     window.location.reload();
+  }
+  logout() {
+    this.authService.clearToken();  // Limpia el token del almacenamiento local
+    this.router.navigate(['/login']);  // Redirige al usuario a la página de login
   }
 }
