@@ -144,9 +144,6 @@
     /* Aumentar la opacidad al 100% al pasar el mouse */
 }
 
-
-
-
 /* Estilos para el Lightbox */
 .lightbox {
     display: none;
@@ -309,5 +306,62 @@
     }
     .close {
         top: 60px;
+    }
+}
+
+/* Sección de Beneficios */
+.benefits-section {
+    margin-top: 1rem; /* Espaciado superior */
+    text-align: left; /* Alineación a la izquierda */
+}
+
+/* Lista de Beneficios */
+.benefits-section ul {
+    list-style-type: disc; /* Tipo de viñeta */
+    padding-left: 1.5rem; /* Espaciado a la izquierda */
+    margin: 0; /* Elimina márgenes predeterminados */
+}
+
+/* Elementos de la Lista de Beneficios */
+.benefits-section li {
+    margin-bottom: 0.5rem; /* Espaciado entre elementos */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    line-height: 1.4; /* Altura de línea para mejor legibilidad */
+}
+
+/* Ajustes para el Contenedor de la Tarjeta Pequeña */
+.sm-screen .bg-light {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los elementos al inicio a la izquierda */
+}
+
+/* Alineación del Ícono de la Lupa */
+.sm-screen .click-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* Ajusta según sea necesario */
+}
+
+/* Asegura que la Imagen y el Contenido no se superpongan */
+.sm-screen .position-relative {
+    position: relative;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+/* Ajusta el Espaciado del Botón "Ver Descripción" */
+.sm-screen .btn-dark {
+    margin-top: 1rem; /* Espaciado superior */
+}
+
+/* Opcional: Mejora la Responsividad en Dispositivos Móviles */
+@media (max-width: 576px) {
+    .benefits-section ul {
+        padding-left: 1.2rem; /* Reduce el padding en pantallas pequeñas */
+    }
+
+    .benefits-section li {
+        font-size: 0.85rem; /* Ajusta el tamaño de fuente */
     }
 }

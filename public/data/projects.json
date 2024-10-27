@@ -3,51 +3,71 @@
     "img": "images/2024-09-0521-54-00-ezgif.com-crop.gif",
     "id": 2,
     "date": "2022-2024",
-    "name": "Asistente virtual Personalizado",
-    "description": "Un Asistente virtual Personalizado redefine los chatbots con los últimos avances en inteligencia artificial. Aprovechando los potentes modelos actuales, permite integrar cualquier tipo de información para actuar de manera eficiente y precisa para ti.",
+    "name": "Asistente Virtual Inteligente para Atención al Cliente",
+    "description": "Revoluciona la atención al cliente con un asistente virtual avanzado, diseñado para resolver consultas de manera instantánea y precisa. Potenciado por los modelos más avanzados de inteligencia artificial, este asistente se integra fácilmente con tus sistemas, proporcionando soporte 24/7 y mejorando la experiencia del usuario.",
     "tecnologies": [
       "Python",
       "ChatGPT",
       "Gemini",
-      "ApiREST"
+      "API REST"
     ],
-    "link": "https://www.franciscomedinaofficial.com"
+    "link": "https://www.franciscomedinaofficial.com",
+    "benefits": [
+      "Atención instantánea y precisa",
+      "Disponible 24/7 para tus clientes",
+      "Integración perfecta con tus sistemas"
+    ]
   },
   {
     "img": "images/2024-09-0522-50-42-ezgif.com-crop.gif",
     "id": 1,
     "date": "2024",
-    "name": "Análisis Predictivo y Aprendizaje Automático",
-    "description": "Con el uso del aprendizaje automático para realizar predicciones y clasificaciones precisas podre indentificar patrones temporales y más. Transformo datos complejos en información valiosa para optimizar decisiones empresariales.",
+    "name": "Inteligencia Predictiva para Decisiones Estratégicas",
+    "description": "Transforma datos en decisiones estratégicas con soluciones de análisis predictivo que identifican patrones ocultos y anticipan tendencias. Utilizando aprendizaje automático y minería de datos, esta herramienta optimiza la toma de decisiones en tiempo real, aportando valor y precisión a tu negocio.",
     "tecnologies": [
       "Python",
       "Machine Learning",
       "Data Mining"
+    ],
+    "benefits": [
+      "Identificación de patrones y tendencias",
+      "Mejora en decisiones estratégicas",
+      "Análisis de datos en tiempo real"
     ]
   },
   {
     "img": "images/dashboard.png",
-    "id": 1,
+    "id": 3,
     "date": "2024",
-    "name": "Visualización de Datos Automatizada",
-    "description": "Automatizo la visualización de datos y la generación de informes. Gracias a las tecnologias actuales, se puede transformar los datos complejos en reportes claros y accesibles lo que optimiza la toma de decisiones empresariales de manera eficiente.",
+    "name": "Automatización de Visualización de Datos para Insights Rápidos",
+    "description": "Obtén visualizaciones de datos automatizadas y reportes intuitivos para una toma de decisiones informada. Esta solución transforma datos complejos en gráficos claros y accionables, permitiendo a los equipos entender y actuar sobre la información de manera eficiente y rápida.",
     "tecnologies": [
-      "python",
+      "Python",
       "AWS",
       "SQL",
       "Power BI"
+    ],
+    "benefits": [
+      "Informes automatizados y precisos",
+      "Visualización clara y comprensible",
+      "Mejora la agilidad en decisiones"
     ]
   },
   {
     "img": "images/bigdata.png",
-    "id": 3,
+    "id": 4,
     "date": "2022-2024",
-    "name": "Procesamiento de BigData",
-    "description": "Gestiono la big data para transformar y transportar datos desde sus fuentes originales hasta su destino final, asegurando un procesamiento eficiente y una visualización clara. Utilizando tecnologías avanzadas para manejar grandes volúmenes de información de manera segura y escalable",
+    "name": "Solución de Big Data Escalable y Segura",
+    "description": "Optimiza el manejo de grandes volúmenes de datos con una solución de Big Data escalable y segura. Esta herramienta procesa y transforma datos de distintas fuentes para ofrecer insights en tiempo real, facilitando una gestión eficiente y segura de la información empresarial.",
     "tecnologies": [
       "Python",
       "Cloud",
       "Spark"
+    ],
+    "benefits": [
+      "Procesamiento de grandes volúmenes de datos",
+      "Gestión de datos segura y eficiente",
+      "Escalabilidad para crecer con tu negocio"
     ]
   }
 ]

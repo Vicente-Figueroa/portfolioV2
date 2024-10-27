@@ -5,8 +5,20 @@
             <div class="p-5">
                 <h2 class="fw-bolder">{{name}}</h2>
                 <p>{{description}}</p>
+
+                <!-- Sección de Tecnologías -->
                 <h2 class="small fw-bolder">Tecnologías</h2>
                 <p>{{tecnologies}}</p>
+
+                <!-- Sección de Beneficios con clase benefits-section -->
+                <div class="benefits-section">
+                    <h2 class="small fw-bolder">Beneficios</h2>
+                    <ul>
+                        <li *ngFor="let benefit of benefits">{{benefit}}</li>
+                    </ul>
+                </div>
+
+                <!-- Enlace de ejemplo -->
                 <div *ngIf="link">
                     <a [href]="link" target="_blank">Ejemplo</a>
                 </div>
@@ -15,7 +27,7 @@
                 <!-- Imagen que abre el lightbox con la imagen y la descripción -->
                 <img [src]="image" (click)="openLightbox(image, description, name)" alt="{{name}}" />
 
-                <!-- Añadimos el ícono de lupa en la versión grande -->
+                <!-- Ícono de lupa en la versión grande -->
                 <div class="click-icon">
                     <i class="fa-solid fa-magnifying-glass-plus"></i>
                 </div>
@@ -24,7 +36,7 @@
     </div>
 </div>
 
-<!-- Experience Card 1 -->
+<!-- Experience Card 1 (Versión pequeña) -->
 <div class="card shadow border-0 rounded-4 mb-5 sm-screen">
     <div class="card-body p-5">
         <div class="row align-items-center gx-5">
@@ -35,17 +47,29 @@
                         <img [src]="image" class="img-fluid" (click)="openLightbox(image, description, name)"
                             alt="{{name}}" />
 
+                        <!-- Ícono de lupa en la esquina superior derecha de la imagen -->
                         <div class="click-icon">
-                            <i class="fa-solid fa-magnifying-glass-plus"></i><!-- Ícono de mano clickeable -->
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
                         </div>
                     </div>
                     <div class="text-primary fw-bolder">{{name}}</div>
+
+                    <!-- Enlace de ejemplo -->
                     <div *ngIf="link">
                         <a [href]="link" target="_blank" class="btn btn-danger m-2">Ejemplo</a>
                     </div>
-                    <h2 class="small fw-bolder">Tecnologías</h2>
-                    <p class="small">{{tecnologies}}</p>
-                    <button class="btn btn-dark" (click)="toggleDescription()">
+
+
+                    <!-- Sección de Beneficios con clase benefits-section -->
+                    <div class="benefits-section">
+                        <h2 class="small fw-bolder">Beneficios</h2>
+                        <ul>
+                            <li *ngFor="let benefit of benefits">{{benefit}}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Botón para ver más -->
+                    <button class="btn btn-dark mt-3" (click)="toggleDescription()">
                         {{showMore ? 'Ocultar' : 'Ver descripción'}}
                     </button>
                 </div>
@@ -56,6 +80,10 @@
                     <span [ngClass]="{'description-hidden': !showMore, 'description-shown': showMore}">
                         {{description}}
                     </span>
+                    <!-- Sección de Tecnologías -->
+                    <h2 class="small fw-bolder mt-3">Tecnologías</h2>
+                    <p class="small">{{tecnologies}}</p>
+
                 </div>
             </div>
         </div>

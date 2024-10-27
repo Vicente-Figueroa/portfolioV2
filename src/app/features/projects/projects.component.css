@@ -1,0 +1,24 @@
+/* Estilos para la sección de proyectos */
+#projects {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Ajustes para contener menos padding en dispositivos móviles */
+@media only screen and (max-width: 768px) {
+    #projects .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    #projects .experience-card {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    #projects .card {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 8px;
+    }
+}

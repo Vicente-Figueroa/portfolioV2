@@ -6,4 +6,5 @@ export interface Project {
     description: string;
     tecnologies: [];
     link?: [];
+    benefits?: [];
 }

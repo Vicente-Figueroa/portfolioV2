@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-project',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-project.component.html',
-  styleUrl: './card-project.component.css'
+  styleUrls: ['./card-project.component.css']
 })
 export class CardProjectComponent {
   @Input() name: any;
@@ -14,6 +14,7 @@ export class CardProjectComponent {
   @Input() image: any;
   @Input() tecnologies: any;
   @Input() link: any;
+  @Input() benefits: any;
 
   showMore = false;
 
@@ -37,6 +38,7 @@ export class CardProjectComponent {
       console.error('Lightbox elements not found.');
     }
   }
+
   closeLightbox(): void {
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
